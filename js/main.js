@@ -64,6 +64,7 @@ function openContactPopup(tab = 'general') {
     if (tab !== currentTab) {
         switchTab(tab);
     }
+    return false;
 }
 
 function closeContactPopup() {
