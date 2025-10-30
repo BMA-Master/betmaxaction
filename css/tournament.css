@@ -1,0 +1,1075 @@
+/* Tournament Page Specific Styles */
+/* Only includes styles unique to tournament.html that are NOT in style.css */
+
+/* Container - Tournament specific */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Nav Overlay - Tournament specific */
+.nav-overlay {
+    display: none;
+}
+
+/* Hero Section - Tournament Specific */
+.hero {
+    padding: 8rem 2rem;
+    background: linear-gradient(135deg, var(--bma-green) 0%, var(--bma-black) 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=3267') center/cover;
+    z-index: 0;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(46, 139, 87, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: 1;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--bma-white);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+}
+
+.hero h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--bma-yellow);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+.hero .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+/* Live Demo Section / Betting Interface */
+.demo-section {
+    padding: 6rem 2rem;
+    background: var(--bma-dark-300);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    justify-content: center;
+}
+
+.section-x {
+    font-size: 4rem;
+    color: var(--bma-yellow);
+    font-weight: 900;
+    text-shadow: 3px 3px 0px var(--bma-black);
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--bma-white);
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.betting-interface {
+    width: 100%;
+    background: #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.betting-header {
+    background: #2a2a2a;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.betting-logo {
+    color: var(--bma-yellow);
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.betting-nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-item {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #ccc;
+}
+
+.nav-item.active {
+    background: var(--bma-green);
+    color: white;
+}
+
+.betting-content {
+    padding: 1.5rem;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.tournament-header {
+    background: rgba(46, 139, 87, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--bma-green);
+}
+
+.tournament-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tournament-details h3 {
+    color: var(--bma-yellow);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.3rem;
+}
+
+.tournament-details p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.game-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: #2a2a2a;
+    border-radius: 8px;
+    border-left: 3px solid var(--bma-green);
+}
+
+.team-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.team {
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.time {
+    color: #888;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.odds {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.odd-btn {
+    background: #333;
+    color: white;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #444;
+}
+
+.odd-btn:hover {
+    background: var(--bma-green);
+    border-color: var(--bma-green);
+}
+
+.betting-footer {
+    background: #2a2a2a;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #333;
+}
+
+.live-indicator {
+    color: var(--bma-green);
+    font-weight: 600;
+    font-size: 0.9rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.balance-info {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+/* How It Works Section */
+.how-section {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, var(--bma-dark-400) 0%, var(--bma-dark-200) 100%);
+}
+
+.how-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.how-left {
+    padding-right: 2rem;
+}
+
+.how-right {
+    position: relative;
+}
+
+.how-description {
+    color: var(--bma-white);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.tournament-dollars {
+    color: var(--bma-white);
+    position: relative;
+    display: inline-block;
+}
+
+.tournament-dollars::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--bma-green);
+    animation: underlineExpand 0.5s ease 0.5s forwards;
+}
+
+@keyframes underlineExpand {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.how-steps {
+    margin: 3rem 0;
+}
+
+.how-step {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(46, 139, 87, 0.1);
+    border-left: 4px solid var(--bma-green);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.how-step:hover {
+    background: rgba(46, 139, 87, 0.2);
+    transform: translateX(10px);
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: var(--bma-yellow);
+    color: var(--bma-black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 900;
+    flex-shrink: 0;
+}
+
+.step-content h3 {
+    color: var(--bma-white);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.how-note {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.how-highlight {
+    color: var(--bma-white);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.how-mockup {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.how-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.how-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(46, 139, 87, 0.6) 100%);
+    z-index: 1;
+}
+
+.mockup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    text-align: center;
+    width: 80%;
+}
+
+.mockup-header {
+    color: var(--bma-yellow);
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    height: 1.5rem;
+    line-height: 1.5rem;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+}
+
+.mockup-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 0 1rem;
+}
+
+.mockup-stats .stat {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid var(--bma-green);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.mockup-stats .stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--bma-white);
+    margin-bottom: 0.25rem;
+    height: 2rem;
+    line-height: 2rem;
+    position: relative;
+}
+
+/* Animation with absolute positioning */
+.fade-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fade-text.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-text.next {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.fade-text.prev {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.mockup-stats .stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--bma-yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+/* Entry Points / Pricing Section */
+.pricing-section {
+    padding: 6rem 2rem;
+    background: var(--bma-dark-300);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+@media (max-width: 1200px) {
+    .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.price-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.price-card:hover {
+    transform: scale(1.05);
+    border-color: var(--bma-yellow);
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.price-card.featured {
+    border-color: var(--bma-green);
+    background: rgba(46, 139, 87, 0.1);
+}
+
+.entry-price {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--bma-yellow);
+    margin-bottom: 0.5rem;
+}
+
+.prize-pool {
+    color: var(--bma-green);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.entry-features {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.entry-features li {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 0;
+}
+
+/* Footer */
+.footer {
+    background: var(--bma-dark-100);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 2px solid var(--bma-green);
+}
+
+.footer-logo {
+    height: 100px;
+    margin-bottom: 1rem;
+}
+
+.footer p {
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0.5rem 0;
+}
+
+.footer a {
+    color: var(--bma-green);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--bma-yellow);
+}
+
+/* Mobile Responsive - Tournament Specific */
+@media (max-width: 768px) {
+    /* Hero Mobile */
+    .hero {
+        padding: 3rem 1rem 4rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        padding: 0 0.5rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .hero-actions .btn-primary {
+        width: 100%;
+        padding: 0.875rem;
+    }
+
+    /* Demo Section Mobile */
+    .demo-section {
+        padding: 3rem 1rem;
+    }
+
+    .section-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-x {
+        font-size: 2.5rem;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+        line-height: 1.1;
+    }
+
+    .demo-container {
+        padding: 1.5rem;
+    }
+
+    .tournament-header h3 {
+        font-size: 1.25rem;
+    }
+
+    .prize-pool {
+        font-size: 1rem;
+    }
+
+    .timer {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+
+    .leaderboard th,
+    .leaderboard td {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .entry-points {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .entry-point {
+        padding: 0.75rem;
+    }
+
+    /* How It Works Mobile */
+    .how-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .how-steps {
+        margin: 2rem 0;
+    }
+
+    .how-step {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .step-number {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+    }
+
+    .step-content h3 {
+        font-size: 1rem;
+    }
+
+    .how-mockup {
+        height: 350px;
+    }
+
+    .mockup-header {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        padding: 0 0.5rem;
+    }
+
+    .mockup-stats {
+        gap: 0.25rem;
+        padding: 0 0.5rem;
+    }
+
+    .mockup-stats .stat {
+        padding: 0.75rem 0.25rem;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .mockup-stats .stat-value {
+        font-size: 1.1rem;
+        min-height: 1.8rem;
+        word-break: break-word;
+    }
+
+    .mockup-stats .stat-label {
+        font-size: 0.65rem;
+    }
+
+    .mockup-content {
+        width: 90%;
+    }
+
+    .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .step-card {
+        padding: 1.5rem;
+    }
+
+    .step-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .step-card p {
+        font-size: 0.9rem;
+    }
+
+    /* Pricing Mobile */
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .pricing-card {
+        padding: 1.5rem;
+    }
+
+    .pricing-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .price {
+        font-size: 1.75rem;
+    }
+
+    .pricing-card ul {
+        font-size: 0.875rem;
+    }
+
+    /* CTA Section Mobile */
+    .cta-section {
+        padding: 3rem 1rem;
+    }
+
+    .cta-section h2 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .cta-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .cta-actions .btn-primary {
+        width: 100%;
+        padding: 0.875rem;
+    }
+
+    /* Footer Mobile */
+    .footer {
+        padding: 2rem 1rem;
+    }
+
+    .footer-logo {
+        max-width: 250px;
+        margin-bottom: 1rem;
+    }
+
+    .footer p {
+        font-size: 0.875rem;
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+    }
+
+    .footer a {
+        font-size: 0.875rem;
+    }
+
+    /* General Typography Mobile */
+    .container {
+        padding: 0 1rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .btn-primary {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero h2 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    /* Demo section mobile improvements */
+    .demo-container {
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    .tournament-header {
+        padding: 1rem;
+    }
+
+    .tournament-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .prize-pool {
+        font-size: 0.9rem;
+    }
+
+    .tournament-entries {
+        font-size: 0.75rem;
+        margin-top: 0.5rem;
+    }
+
+    .timer {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.6rem;
+        margin-top: 0.75rem;
+    }
+
+    /* Leaderboard mobile optimization */
+    .leaderboard-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .leaderboard {
+        font-size: 0.75rem;
+        min-width: 300px;
+    }
+
+    .leaderboard th,
+    .leaderboard td {
+        padding: 0.375rem;
+        font-size: 0.75rem;
+    }
+
+    .rank {
+        width: 30px;
+        height: 30px;
+        font-size: 0.875rem;
+    }
+
+    /* Entry points mobile optimization */
+    .entry-points {
+        margin-top: 1.5rem;
+    }
+
+    .entry-point {
+        padding: 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .entry-price-small {
+        font-size: 1rem;
+    }
+
+    /* How it works section */
+    .how-note,
+    .how-highlight {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        padding: 0 0.5rem;
+    }
+
+    .how-step {
+        padding: 0.75rem;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+    }
+
+    .step-content h3 {
+        font-size: 0.9rem;
+    }
+
+    /* Pricing cards mobile optimization */
+    .pricing-grid {
+        gap: 1rem;
+    }
+
+    .price-card {
+        padding: 1.25rem;
+    }
+
+    .entry-price {
+        font-size: 2rem;
+    }
+
+    .prize-pool {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .entry-features {
+        font-size: 0.8rem;
+    }
+
+    .entry-features li {
+        padding: 0.4rem 0;
+    }
+
+    /* CTA section improvements */
+    .cta-section {
+        padding: 2.5rem 1rem;
+    }
+
+    .cta-section h2 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .cta-section p {
+        font-size: 0.85rem;
+    }
+
+    .cta-actions {
+        margin-top: 1.25rem;
+    }
+
+    .cta-actions .btn-primary {
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Button improvements */
+    .btn-primary {
+        padding: 0.7rem 1rem;
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
+
+    /* General spacing improvements */
+    section {
+        padding: 2.5rem 0;
+    }
+
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    /* Footer mobile optimization */
+    .footer {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .footer p {
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+
+    .footer a {
+        font-size: 0.8rem;
+    }
+
+    /* Step cards */
+    .step-card {
+        padding: 1.25rem;
+    }
+
+    /* Mockup improvements */
+    .how-mockup {
+        height: 300px;
+        margin-top: 2rem;
+    }
+
+    .mockup-header {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+
+    .mockup-stats {
+        padding: 0.5rem;
+    }
+
+    .stat {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .stat-value {
+        font-size: 1.25rem;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
+    }
+}
+
+/* Tablet View */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 0 2rem;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
