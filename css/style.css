@@ -1012,18 +1012,8 @@ body {
     letter-spacing: 0.5px;
     box-shadow: 0 2px 8px rgba(46, 139, 87, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     text-shadow: 0 0 8px rgba(46, 139, 87, 0.4);
-    animation: timerPulse 2s ease-in-out infinite;
     user-select: none;
     -webkit-user-select: none;
-}
-
-@keyframes timerPulse {
-    0%, 100% {
-        box-shadow: 0 2px 8px rgba(46, 139, 87, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-    50% {
-        box-shadow: 0 2px 12px rgba(46, 139, 87, 0.4), 0 0 20px rgba(46, 139, 87, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
 }
 
 .tournament-overlay {
@@ -1049,6 +1039,7 @@ body {
     text-shadow: 0 2px 8px rgba(255, 215, 0, 0.4), 0 4px 16px rgba(255, 215, 0, 0.2);
     user-select: none;
     -webkit-user-select: none;
+    text-align: center;
 }
 
 .tournament-subtitle {
