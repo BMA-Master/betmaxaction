@@ -59,11 +59,15 @@ function switchGameTab(gameTabName) {
 }
 
 function openContactPopup(tab = 'general') {
-    document.getElementById('contactPopup').classList.add('active');
+    const popup = document.getElementById('contactPopup');
+    if (!popup) return false;
+
+    popup.classList.add('active');
     document.body.style.overflow = 'hidden';
-    if (tab !== currentTab) {
-        switchTab(tab);
-    }
+
+    // Always switch to the specified tab
+    switchTab(tab);
+
     return false;
 }
 
@@ -186,9 +190,17 @@ function switchTab(tabName) {
     document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
-    // Add active to selected tab and content
-    document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
-    document.getElementById(`${tabName}-tab`).classList.add('active');
+    // Add active to selected tab button
+    const tabButton = document.querySelector(`[onclick="switchTab('${tabName}')"]`);
+    if (tabButton) {
+        tabButton.classList.add('active');
+    }
+
+    // Add active to selected tab content
+    const tabContent = document.getElementById(`${tabName}-tab`);
+    if (tabContent) {
+        tabContent.classList.add('active');
+    }
 
     currentTab = tabName;
 }
@@ -211,18 +223,25 @@ function handleFormSubmit(event, formType) {
     console.log('Form submitted:', data);
 }
 
-// Close popup when clicking outside
-document.getElementById('contactPopup').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeContactPopup();
-    }
-});
+// Close popup when clicking outside and on Escape key
+document.addEventListener('DOMContentLoaded', function() {
+    const contactPopup = document.getElementById('contactPopup');
 
-// Close popup on Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeContactPopup();
+    if (contactPopup) {
+        // Close popup when clicking outside
+        contactPopup.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeContactPopup();
+            }
+        });
     }
+
+    // Close popup on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeContactPopup();
+        }
+    });
 });
 
 // Intersection Observer for league logo animations
