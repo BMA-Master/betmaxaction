@@ -1153,56 +1153,41 @@
     }
 
     .leaderboard-preview {
-        padding: 1rem;
+        padding: 1.25rem;
         overflow-x: auto;
         border-radius: 12px;
-        -webkit-overflow-scrolling: touch;
     }
 
     .leaderboard-preview h3 {
-        font-size: 1.15rem;
+        font-size: 1.25rem;
         margin-bottom: 1rem;
-        letter-spacing: 0.3px;
     }
 
     .leaderboard-table {
         font-size: 0.875rem;
-        min-width: 100%;
     }
 
     .leaderboard-table th,
     .leaderboard-table td {
-        padding: 0.75rem 0.5rem;
-        white-space: nowrap;
-    }
-
-    .leaderboard-table th {
-        position: sticky;
-        top: 0;
-        background: rgba(10, 10, 10, 0.9);
-        backdrop-filter: blur(5px);
-        z-index: 1;
+        padding: 0.625rem 0.5rem;
     }
 
     .rank-badge {
-        width: 30px;
-        height: 30px;
+        width: 28px;
+        height: 28px;
         font-size: 0.75rem;
     }
 
     .player-name {
-        font-size: 0.85rem;
-        font-weight: 600;
+        font-size: 0.875rem;
     }
 
     .balance {
-        font-size: 0.875rem;
-        font-weight: 700;
+        font-size: 0.9rem;
     }
 
     .roi {
-        font-size: 0.85rem;
-        font-weight: 700;
+        font-size: 0.875rem;
     }
 
     /* How It Works Mobile */
@@ -1394,40 +1379,30 @@
     /* Tournament Lobby Extra Small Mobile */
     .tournament-lobby {
         padding: 1rem;
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        border-radius: 12px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 1px rgba(46, 139, 87, 0.2);
     }
 
     .tournament-card {
         padding: 1rem;
-        border-radius: 10px;
-        margin-bottom: 1.25rem;
-    }
-
-    .tournament-card-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
+        border-radius: 12px;
     }
 
     .tournament-badge {
         font-size: 0.65rem;
-        padding: 0.3rem 0.6rem;
-        border-radius: 12px;
+        padding: 0.3rem 0.65rem;
+        border-radius: 16px;
     }
 
     .tournament-name {
-        font-size: 1.15rem;
-        line-height: 1.2;
-        margin: 0.25rem 0;
-        word-break: break-word;
+        font-size: 1.05rem;
+        line-height: 1.25;
+        margin: 0.375rem 0;
     }
 
     .tournament-tagline {
         font-size: 0.8rem;
-        margin-bottom: 0.875rem;
-        line-height: 1.4;
+        margin-bottom: 1rem;
     }
 
     .tournament-stats {
@@ -1436,30 +1411,24 @@
     }
 
     .stat-item {
-        padding: 0.75rem 0.625rem;
+        padding: 0.625rem 0.5rem;
         border-radius: 8px;
-        min-height: 65px;
-        text-align: center;
     }
 
     .stat-value {
-        font-size: 1.25rem;
-        margin-top: 0.25rem;
+        font-size: 1.125rem;
     }
 
     .stat-label {
-        font-size: 0.675rem;
-        margin-bottom: 0.25rem;
-        letter-spacing: 0.25px;
+        font-size: 0.7rem;
+        margin-bottom: 0.375rem;
     }
 
     .btn-join-tournament {
-        font-size: 0.875rem;
-        padding: 0.875rem;
+        font-size: 0.9rem;
+        padding: 0.8rem;
         border-radius: 8px;
-        margin-top: 0.75rem;
-        letter-spacing: 0.5px;
-        font-weight: 800;
+        margin-top: 0.5rem;
     }
 
     .slate-header {
