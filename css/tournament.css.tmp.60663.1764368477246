@@ -1301,7 +1301,32 @@
     padding: 0.5rem 0;
 }
 
-/* Footer - removed generic styles as footer is a shared partial with styles in style.css */
+/* Footer */
+.footer {
+    background: var(--bma-dark-100);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 2px solid var(--bma-green);
+}
+
+.footer-logo {
+    height: 100px;
+    margin-bottom: 1rem;
+}
+
+.footer p {
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0.5rem 0;
+}
+
+.footer a {
+    color: var(--bma-green);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--bma-yellow);
+}
 
 /* Mobile Responsive - Tournament Specific */
 @media (max-width: 768px) {
