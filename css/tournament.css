@@ -77,7 +77,6 @@
 .tournament-hero-content .subpage-hero-title {
     font-size: 3.25rem;
     margin-bottom: 1.5rem;
-    white-space: nowrap;
 }
 
 .tournament-hero-content .subpage-hero-description {
@@ -445,6 +444,117 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(46, 139, 87, 0.2);
 }
+
+/* Screenshot Carousel */
+.screenshot-carousel {
+    position: relative;
+    width: 100%;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.carousel-slides {
+    position: relative;
+    width: 100%;
+}
+
+.carousel-slide {
+    display: none;
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.carousel-slide:hover {
+    transform: scale(1.02);
+}
+
+.carousel-slide.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%), rgba(20, 20, 20, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--bma-yellow);
+    cursor: pointer;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.carousel-nav:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%), rgba(20, 20, 20, 0.95);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.carousel-nav.prev {
+    left: 16px;
+}
+
+.carousel-nav.next {
+    right: 16px;
+}
+
+.carousel-nav.hidden {
+    display: none;
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.indicator:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.indicator.active {
+    background: var(--bma-yellow);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Lightbox CSS moved to style.css (global) */
 
 .placeholder-icon {
     font-size: 80px;
@@ -1799,12 +1909,81 @@
         padding: 0.75rem 1.25rem;
         font-size: 0.875rem;
     }
+
+    /* Tournament Hero Mobile */
+    .tournament-hero {
+        padding: 3rem 1.5rem 2rem;
+    }
+
+    .tournament-hero-grid {
+        gap: 1.5rem;
+    }
+
+    .tournament-intro-section {
+        padding: 2rem 1.5rem;
+    }
+
+    .tournament-intro-text {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .tournament-intro-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .tournament-intro-actions .btn-primary,
+    .tournament-intro-actions .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Carousel Mobile - larger touch targets */
+    .carousel-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .carousel-nav.prev {
+        left: 8px;
+    }
+
+    .carousel-nav.next {
+        right: 8px;
+    }
+
+    .carousel-indicators {
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .indicator {
+        width: 8px;
+        height: 8px;
+    }
 }
 
 /* Extra Small Mobile */
 @media (max-width: 480px) {
     .section-title {
         font-size: 1.5rem;
+    }
+
+    /* Tournament Hero Extra Small */
+    .tournament-hero-content .subpage-hero-title {
+        font-size: 2rem;
+    }
+
+    .subpage-hero-title {
+        font-size: 2rem;
+    }
+
+    /* Breadcrumb Extra Small */
+    .breadcrumb-nav {
+        font-size: 0.65rem;
+        letter-spacing: 0.5px;
     }
 
     /* Tournament Lobby Extra Small Mobile */

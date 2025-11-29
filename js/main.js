@@ -6,24 +6,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-link');
 
     function toggleMenu() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        navOverlay.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        if (hamburger) hamburger.classList.toggle('active');
+        if (navMenu) navMenu.classList.toggle('active');
+        if (navOverlay) navOverlay.classList.toggle('active');
+        document.body.style.overflow = navMenu && navMenu.classList.contains('active') ? 'hidden' : '';
     }
 
     function closeMenu() {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-        navOverlay.classList.remove('active');
+        if (hamburger) hamburger.classList.remove('active');
+        if (navMenu) navMenu.classList.remove('active');
+        if (navOverlay) navOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
 
     // Toggle menu when hamburger is clicked
-    hamburger.addEventListener('click', toggleMenu);
+    if (hamburger) {
+        hamburger.addEventListener('click', toggleMenu);
+    }
 
     // Close menu when overlay is clicked
-    navOverlay.addEventListener('click', closeMenu);
+    if (navOverlay) {
+        navOverlay.addEventListener('click', closeMenu);
+    }
 
     // Close menu when a nav link is clicked
     navLinks.forEach(link => {
@@ -267,4 +271,225 @@ document.addEventListener('DOMContentLoaded', function() {
         logoObserver.observe(logo);
     });
 
+});
+
+// Screenshot Carousel functionality
+class ScreenshotCarousel {
+    constructor(element) {
+        this.container = element;
+        this.slides = element.querySelectorAll('.carousel-slide');
+        this.currentIndex = 0;
+        this.prevBtn = element.querySelector('.carousel-nav.prev');
+        this.nextBtn = element.querySelector('.carousel-nav.next');
+        this.indicators = element.querySelectorAll('.indicator');
+
+        if (this.slides.length > 0) {
+            this.init();
+        }
+    }
+
+    init() {
+        // Show first slide
+        this.showSlide(0);
+
+        // Hide nav buttons if only one slide
+        if (this.slides.length <= 1) {
+            if (this.prevBtn) this.prevBtn.classList.add('hidden');
+            if (this.nextBtn) this.nextBtn.classList.add('hidden');
+            this.indicators.forEach(ind => ind.style.display = 'none');
+            return;
+        }
+
+        // Bind navigation buttons
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.prev();
+            });
+        }
+
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.next();
+            });
+        }
+
+        // Bind indicators
+        this.indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.showSlide(index);
+            });
+        });
+
+        // Click on slide to open lightbox
+        this.slides.forEach((slide, index) => {
+            slide.addEventListener('click', () => {
+                const images = Array.from(this.slides).map(s => ({
+                    src: s.src,
+                    alt: s.alt
+                }));
+                window.lightbox.open(images, index);
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (this.container.querySelector('.carousel-slide.active')) {
+                if (e.key === 'ArrowLeft') this.prev();
+                if (e.key === 'ArrowRight') this.next();
+            }
+        });
+    }
+
+    showSlide(index) {
+        // Remove active from all
+        this.slides.forEach(slide => slide.classList.remove('active'));
+        this.indicators.forEach(ind => ind.classList.remove('active'));
+
+        // Add active to current
+        this.currentIndex = index;
+        this.slides[this.currentIndex].classList.add('active');
+        if (this.indicators[this.currentIndex]) {
+            this.indicators[this.currentIndex].classList.add('active');
+        }
+    }
+
+    next() {
+        const nextIndex = (this.currentIndex + 1) % this.slides.length;
+        this.showSlide(nextIndex);
+    }
+
+    prev() {
+        const prevIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+        this.showSlide(prevIndex);
+    }
+}
+
+// Lightbox functionality
+class Lightbox {
+    constructor() {
+        this.overlay = null;
+        this.image = null;
+        this.closeBtn = null;
+        this.prevBtn = null;
+        this.nextBtn = null;
+        this.currentImages = [];
+        this.currentIndex = 0;
+        this.init();
+    }
+
+    init() {
+        // Check if lightbox exists, create if not
+        this.overlay = document.getElementById('lightbox');
+        if (!this.overlay) {
+            this.createLightbox();
+        }
+
+        this.image = this.overlay.querySelector('.lightbox-image');
+        this.closeBtn = this.overlay.querySelector('.lightbox-close');
+        this.prevBtn = this.overlay.querySelector('.lightbox-nav.prev');
+        this.nextBtn = this.overlay.querySelector('.lightbox-nav.next');
+
+        // Bind close button
+        this.closeBtn.addEventListener('click', () => this.close());
+
+        // Bind navigation
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.prev();
+            });
+        }
+
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.next();
+            });
+        }
+
+        // Click outside image to close
+        this.overlay.addEventListener('click', (e) => {
+            if (e.target === this.overlay) {
+                this.close();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (this.overlay.classList.contains('active')) {
+                if (e.key === 'Escape') this.close();
+                if (e.key === 'ArrowLeft') this.prev();
+                if (e.key === 'ArrowRight') this.next();
+            }
+        });
+    }
+
+    createLightbox() {
+        const lightbox = document.createElement('div');
+        lightbox.id = 'lightbox';
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = `
+            <button class="lightbox-close">&times;</button>
+            <button class="lightbox-nav prev">&lsaquo;</button>
+            <img src="" alt="" class="lightbox-image">
+            <button class="lightbox-nav next">&rsaquo;</button>
+        `;
+        document.body.appendChild(lightbox);
+        this.overlay = lightbox;
+    }
+
+    open(images, startIndex = 0) {
+        this.currentImages = images;
+        this.currentIndex = startIndex;
+        this.showImage(this.currentIndex);
+        this.overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent body scroll
+
+        // Hide nav buttons if only one image
+        if (images.length <= 1) {
+            if (this.prevBtn) this.prevBtn.classList.add('hidden');
+            if (this.nextBtn) this.nextBtn.classList.add('hidden');
+        } else {
+            if (this.prevBtn) this.prevBtn.classList.remove('hidden');
+            if (this.nextBtn) this.nextBtn.classList.remove('hidden');
+        }
+    }
+
+    close() {
+        this.overlay.classList.remove('active');
+        document.body.style.overflow = ''; // Restore body scroll
+    }
+
+    showImage(index) {
+        this.currentIndex = index;
+        const imageData = this.currentImages[this.currentIndex];
+        this.image.src = imageData.src;
+        this.image.alt = imageData.alt;
+    }
+
+    next() {
+        if (this.currentImages.length <= 1) return;
+        const nextIndex = (this.currentIndex + 1) % this.currentImages.length;
+        this.showImage(nextIndex);
+    }
+
+    prev() {
+        if (this.currentImages.length <= 1) return;
+        const prevIndex = (this.currentIndex - 1 + this.currentImages.length) % this.currentImages.length;
+        this.showImage(prevIndex);
+    }
+}
+
+// Initialize carousels and lightbox on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize lightbox (global)
+    window.lightbox = new Lightbox();
+
+    // Initialize all carousels
+    document.querySelectorAll('.screenshot-carousel').forEach(carousel => {
+        new ScreenshotCarousel(carousel);
+    });
 });
