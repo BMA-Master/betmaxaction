@@ -1359,20 +1359,128 @@
 
 /* Entry Points / Pricing Section */
 .pricing-section {
-    padding: 6rem 2rem;
+    padding: 6rem 0;
     background: var(--bma-dark-300);
+}
+
+.pricing-section .container {
+    padding: 0 1rem;
+    max-width: 1400px;
+}
+
+/* Entry Tabs */
+.entry-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2.5rem auto;
+    max-width: 800px;
+    flex-wrap: wrap;
+}
+
+.entry-tab-button {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%), rgba(20, 20, 20, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.entry-tab-button svg {
+    flex-shrink: 0;
+}
+
+.entry-tab-button:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%), rgba(20, 20, 20, 0.8);
+    border-color: var(--bma-yellow);
+    color: var(--bma-yellow);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 215, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.entry-tab-button.active {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%), rgba(20, 20, 20, 0.9);
+    border-color: var(--bma-yellow);
+    color: var(--bma-yellow);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.entry-tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--bma-yellow);
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+/* Entry Tab Content */
+.entry-tab-content {
+    display: none;
+}
+
+.entry-tab-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+.entry-tab-description {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Entry Badge (for F2P and Custom tabs) */
+.entry-badge {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--bma-yellow);
+    margin-bottom: 0.75rem;
+    padding: 0.5rem 1.25rem;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+    border: 2px solid var(--bma-yellow);
+    border-radius: 8px;
+    display: inline-block;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 2rem;
-    margin-top: 3rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 768px) {
     .pricing-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1100px) {
+    .pricing-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.25rem;
     }
 }
 
@@ -1380,7 +1488,7 @@
     background: rgba(255, 255, 255, 0.05);
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    padding: 2rem 1.5rem;
+    padding: 1.75rem 1.25rem;
     text-align: center;
     transition: all 0.3s ease;
 }
@@ -1508,7 +1616,37 @@
     }
 
     .content-text h2 {
-        font-size: 32px;
+        font-size: 1.75rem;
+        line-height: 1.2;
+    }
+
+    .content-text p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Entry Tabs Mobile */
+    .entry-tabs {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0 1rem;
+    }
+
+    .entry-tab-button {
+        width: 100%;
+        padding: 1rem;
+        font-size: 0.9rem;
+        justify-content: center;
+    }
+
+    .entry-tab-description {
+        font-size: 0.95rem;
+        padding: 0 1rem;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     /* Demo Section Mobile */

@@ -273,6 +273,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+// Entry Tab Switching (for Tournament Entry Points section)
+function switchEntryTab(tabName) {
+    // Remove active class from all tab buttons
+    document.querySelectorAll('.entry-tab-button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Remove active class from all tab content
+    document.querySelectorAll('.entry-tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+
+    // Add active class to clicked button
+    const activeButton = document.querySelector(`.entry-tab-button[onclick="switchEntryTab('${tabName}')"]`);
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+
+    // Add active class to corresponding content
+    const activeContent = document.getElementById(`${tabName}-tab`);
+    if (activeContent) {
+        activeContent.classList.add('active');
+    }
+}
+
 // Screenshot Carousel functionality
 class ScreenshotCarousel {
     constructor(element) {
