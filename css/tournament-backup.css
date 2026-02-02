@@ -8,14 +8,6 @@
     padding: 0 2rem;
 }
 
-/* TD$ Highlight - Consistent green styling for Tournament Dollars */
-.td-highlight {
-    color: var(--bma-green);
-    font-weight: 700;
-    position: relative;
-    text-shadow: 0 0 20px rgba(46, 139, 87, 0.4);
-}
-
 /* Tournament Hero - Subpage Style with Background Image */
 .tournament-hero {
     position: relative;
@@ -111,52 +103,23 @@
 /* Tournament Intro Section */
 .tournament-intro-section {
     background: var(--bma-dark-200);
-    padding: 4rem 2rem;
+    padding: 3rem 2rem;
+    text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* 50/50 Grid Layout */
-.tournament-intro-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.tournament-intro-left {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.tournament-intro-logo {
-    max-width: 300px;
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 10px 40px rgba(255, 215, 0, 0.2));
-    display: block;
-    margin: 0 auto;
-}
-
-.tournament-intro-right {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
 }
 
 .tournament-intro-text {
     font-size: 1.125rem;
     color: rgba(255, 255, 255, 0.85);
-    margin: 0;
+    max-width: 900px;
+    margin: 0 auto 2rem;
     line-height: 1.7;
-    text-align: left;
 }
 
 .tournament-intro-actions {
     display: flex;
     gap: 1rem;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -685,7 +648,7 @@
     position: relative;
 }
 
-/* Enhanced shimmer effect - more sophisticated */
+/* Subtle animated gradient overlay - optimized */
 .tournament-lobby::before {
     content: '';
     position: absolute;
@@ -695,48 +658,30 @@
     height: 100%;
     background: linear-gradient(90deg,
         transparent 0%,
-        rgba(46, 139, 87, 0.05) 25%,
-        rgba(255, 215, 0, 0.03) 50%,
-        rgba(46, 139, 87, 0.05) 75%,
+        rgba(46, 139, 87, 0.03) 50%,
         transparent 100%
     );
-    animation: shimmer 10s infinite ease-in-out;
+    animation: shimmer 8s infinite;
     pointer-events: none;
     will-change: transform;
 }
 
 @keyframes shimmer {
     0% { transform: translateX(0); }
-    100% { transform: translateX(200%); }
+    50%, 100% { transform: translateX(300%); }
 }
 
-/* Tournament Info Card - Enhanced glassmorphic design */
+/* Tournament Info Card */
 .tournament-card {
-    background: linear-gradient(135deg,
-        rgba(46, 139, 87, 0.15) 0%,
-        rgba(255, 255, 255, 0.02) 50%,
-        rgba(10, 10, 10, 0.8) 100%);
+    background: linear-gradient(135deg, rgba(46, 139, 87, 0.12) 0%, rgba(10, 10, 10, 0.6) 100%);
     border: 1px solid rgba(46, 139, 87, 0.4);
     border-radius: 16px;
     padding: 2rem;
     margin-bottom: 2rem;
     position: relative;
-    backdrop-filter: blur(10px) saturate(150%);
-    box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.5),
-        0 0 80px rgba(46, 139, 87, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     z-index: 1;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.tournament-card:hover {
-    transform: translateY(-2px);
-    box-shadow:
-        0 16px 50px rgba(0, 0, 0, 0.6),
-        0 0 100px rgba(46, 139, 87, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border-color: rgba(46, 139, 87, 0.6);
 }
 
 .tournament-card-header {
@@ -768,34 +713,6 @@
     color: var(--bma-green);
     border-color: var(--bma-green);
     text-shadow: 0 0 8px rgba(46, 139, 87, 0.6);
-    animation: breathingPulse 2s infinite ease-in-out;
-}
-
-.live-indicator {
-    animation: pulseGlow 2s infinite;
-    margin-right: 0.25rem;
-}
-
-@keyframes breathingPulse {
-    0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 4px 12px rgba(46, 139, 87, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-    50% {
-        transform: scale(1.02);
-        box-shadow: 0 4px 16px rgba(46, 139, 87, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    }
-}
-
-@keyframes pulseGlow {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.6;
-        transform: scale(1.2);
-    }
 }
 
 .tournament-name {
@@ -873,56 +790,30 @@
     padding: 1rem;
     background: linear-gradient(135deg, var(--bma-green) 0%, #1e6b42 100%);
     color: white;
-    border: 1px solid rgba(46, 139, 87, 0.4);
+    border: none;
     border-radius: 12px;
     font-size: 1.125rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow:
-        0 4px 16px rgba(46, 139, 87, 0.3),
-        0 0 40px rgba(46, 139, 87, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(46, 139, 87, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
 }
 
-.btn-join-tournament::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-}
-
 .btn-join-tournament:hover {
     background: linear-gradient(135deg, #3aa068 0%, var(--bma-green) 100%);
     transform: translateY(-2px);
-    border-color: var(--bma-green);
-    box-shadow:
-        0 8px 24px rgba(46, 139, 87, 0.5),
-        0 0 60px rgba(46, 139, 87, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 24px rgba(46, 139, 87, 0.5), 0 0 20px rgba(46, 139, 87, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     will-change: transform;
-}
-
-.btn-join-tournament:hover::before {
-    left: 100%;
 }
 
 .btn-join-tournament:active {
     transform: translateY(0);
-    box-shadow:
-        0 2px 8px rgba(46, 139, 87, 0.4),
-        inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(46, 139, 87, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* Slate Section */
@@ -1020,43 +911,18 @@
     overflow: hidden;
 }
 
-/* Enhanced hover effect with sweep animation */
-.game-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg,
-        transparent 0%,
-        rgba(46, 139, 87, 0.1) 50%,
-        transparent 100%);
-    transform: translateX(-100%);
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-}
+/* Removed sweep effect on game cards for better performance */
 
 .game-card:hover {
-    border-color: rgba(46, 139, 87, 0.6);
-    background: linear-gradient(135deg,
-        rgba(46, 139, 87, 0.12) 0%,
-        rgba(255, 215, 0, 0.02) 50%,
-        rgba(0, 0, 0, 0.8) 100%);
-    transform: translateY(-4px) scale(1.02);
-    box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.5),
-        0 0 24px rgba(46, 139, 87, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-color: rgba(46, 139, 87, 0.5);
+    background: linear-gradient(135deg, rgba(46, 139, 87, 0.08) 0%, rgba(0, 0, 0, 0.7) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(46, 139, 87, 0.15);
     will-change: transform;
 }
 
-.game-card:hover::before {
-    transform: translateX(0);
-}
-
 .game-card:active {
-    transform: translateY(-2px) scale(1.01);
+    transform: translateY(0);
 }
 
 .game-time {
@@ -1372,16 +1238,9 @@
     color: var(--bma-white);
     font-size: 1.3rem;
     font-weight: 700;
-    margin: 0 0 0.5rem 0;
+    margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-}
-
-.step-content p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.95rem;
-    margin: 0;
-    line-height: 1.5;
 }
 
 .how-note {
@@ -1401,130 +1260,38 @@
     line-height: 1.6;
 }
 
-/* Device Mockups */
-.device-mockups {
+.how-mockup {
     position: relative;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Laptop Mockup */
-.laptop-mockup {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-}
-
-.laptop-screen {
-    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-    border: 3px solid #333;
-    border-radius: 8px 8px 0 0;
-    padding: 10px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
     overflow: hidden;
-    position: relative;
+    height: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-.laptop-screen::before {
-    content: '';
+.how-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.how-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 20px;
-    background: #2a2a2a;
-    border-bottom: 1px solid #444;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(46, 139, 87, 0.6) 100%);
+    z-index: 1;
 }
 
-.laptop-base {
-    background: linear-gradient(to bottom, #d1d1d1 0%, #a8a8a8 100%);
-    height: 20px;
-    border-radius: 0 0 12px 12px;
-    position: relative;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-}
-
-.laptop-base::before {
-    content: '';
+.mockup-content {
     position: absolute;
-    top: 2px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background: #888;
-    border-radius: 2px;
-}
-
-/* Phone Mockup */
-.phone-mockup {
-    position: absolute;
-    right: -30px;
-    bottom: -20px;
-    width: 140px;
-    background: #1a1a1a;
-    border: 2px solid #333;
-    border-radius: 20px;
-    padding: 8px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-}
-
-.phone-mockup::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 4px;
-    background: #333;
-    border-radius: 2px;
-}
-
-.phone-screen {
-    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-    border-radius: 12px;
-    height: 240px;
-    overflow: hidden;
-}
-
-/* Placeholder Content */
-.screen-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding: 20px;
-    color: var(--bma-white);
-}
-
-.laptop-screen .screen-placeholder {
-    height: 300px;
-    margin-top: 20px;
-}
-
-.screen-placeholder svg {
-    margin-bottom: 1rem;
-    color: var(--bma-green);
-}
-
-.screen-placeholder p {
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0.5rem 0;
-    color: var(--bma-yellow);
-}
-
-.screen-placeholder span {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.5);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    text-align: center;
+    width: 80%;
 }
 
 .mockup-header {
@@ -2129,24 +1896,6 @@
         gap: 2rem;
     }
 
-    /* Device Mockups Mobile */
-    .device-mockups {
-        height: auto;
-        padding: 2rem 0;
-    }
-
-    .laptop-mockup {
-        max-width: 100%;
-    }
-
-    .phone-mockup {
-        display: none; /* Hide phone on mobile to avoid clutter */
-    }
-
-    .laptop-screen .screen-placeholder {
-        height: 200px;
-    }
-
     .how-steps {
         margin: 2rem 0;
     }
@@ -2324,27 +2073,14 @@
         padding: 2rem 1.5rem;
     }
 
-    /* Stack grid on mobile */
-    .tournament-intro-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        text-align: center;
-    }
-
-    .tournament-intro-logo {
-        max-width: 280px;
-    }
-
     .tournament-intro-text {
         font-size: 1rem;
         line-height: 1.6;
-        text-align: center;
     }
 
     .tournament-intro-actions {
         flex-direction: column;
         gap: 1rem;
-        justify-content: center;
     }
 
     .tournament-intro-actions .btn-primary,
@@ -2622,10 +2358,6 @@
 
     .step-content h3 {
         font-size: 0.9rem;
-    }
-
-    .step-content p {
-        font-size: 0.8rem;
     }
 
     /* Pricing cards mobile optimization */
