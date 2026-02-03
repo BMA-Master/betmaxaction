@@ -3342,8 +3342,7 @@ body {
 /* CTA Section */
 .cta-section {
     padding: 4rem 2rem;
-    background: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=3267') center/cover,
-                linear-gradient(135deg, var(--bma-green) 0%, var(--bma-black) 100%);
+    background: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=3267') center/cover;
     color: white;
     text-align: center;
     position: relative;
@@ -3357,7 +3356,23 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(46, 139, 87, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%);
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(255,255,255,0.015) 2px,
+            rgba(255,255,255,0.015) 4px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(255,255,255,0.015) 2px,
+            rgba(255,255,255,0.015) 4px
+        ),
+        linear-gradient(135deg, rgba(0, 230, 118, 0.7) 0%, rgba(0, 0, 0, 0.85) 100%),
+        linear-gradient(45deg, rgba(255, 215, 0, 0.15) 0%, rgba(220, 20, 60, 0.1) 100%);
     z-index: 0;
 }
 
@@ -3532,13 +3547,15 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.9);
-    background: var(--bma-white);
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     max-width: 600px;
     width: 90%;
     max-height: 90vh;
     overflow: hidden;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 1px rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
 }
 
@@ -3547,7 +3564,8 @@ body {
 }
 
 .popup-header {
-    background: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=3267') center/cover;
+    background: linear-gradient(135deg, rgba(46, 139, 87, 0.15) 0%, rgba(0, 0, 0, 0.8) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 2rem;
     text-align: center;
     position: relative;
@@ -3561,7 +3579,13 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(46, 139, 87, 0.9) 0%, rgba(255, 215, 0, 0.5) 100%);
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.02) 2px,
+        rgba(255, 255, 255, 0.02) 4px
+    );
     z-index: 0;
 }
 
@@ -3624,8 +3648,8 @@ body {
 /* Tab System */
 .contact-tabs {
     display: flex;
-    background: var(--bma-gray-50);
-    border-bottom: 1px solid var(--bma-gray-200);
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .tab-button {
@@ -3635,18 +3659,18 @@ body {
     border: none;
     cursor: pointer;
     font-weight: 600;
-    color: var(--bma-gray-600);
+    color: rgba(255, 255, 255, 0.6);
     transition: all 0.2s ease;
     border-bottom: 3px solid transparent;
 }
 
 .tab-button:hover {
-    background: var(--bma-gray-100);
-    color: var(--bma-gray-900);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .tab-button.active {
-    background: var(--bma-white);
+    background: rgba(46, 139, 87, 0.1);
     color: var(--bma-green);
     border-bottom-color: var(--bma-green);
     font-weight: 800;
@@ -3656,10 +3680,15 @@ body {
 .tab-content {
     display: none;
     padding: 2rem;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .tab-content.active {
     display: block;
+}
+
+.tab-content p {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* Form Styling */
@@ -3670,7 +3699,7 @@ body {
 .form-label {
     display: block;
     font-weight: 600;
-    color: var(--bma-gray-900);
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 0.5rem;
 }
 
@@ -3679,12 +3708,13 @@ body {
 .form-select {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 2px solid var(--bma-gray-200);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     font-family: inherit;
     font-size: 1rem;
     transition: all 0.2s ease;
-    background: var(--bma-white);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--bma-white);
 }
 
 .form-input:focus,
@@ -3707,9 +3737,9 @@ body {
 }
 
 .form-submit {
-    background: var(--bma-green);
+    background: linear-gradient(135deg, var(--bma-green) 0%, #1e6b42 100%);
     color: var(--bma-white);
-    border: none;
+    border: 1px solid rgba(46, 139, 87, 0.3);
     padding: 1rem 2rem;
     border-radius: 8px;
     font-weight: 600;
