@@ -3227,7 +3227,7 @@ body {
 /* Technology Section */
 .technology {
     padding: 4rem 2rem;
-    background: url('/betmaxaction/images/bma texture.jpg') center/cover no-repeat;
+    background: url('/betmaxaction/images/bet max action gray background.jpg') center/cover no-repeat;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     position: relative;
 }

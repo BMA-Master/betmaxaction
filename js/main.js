@@ -1,33 +1,42 @@
-// Hamburger Menu Toggle
-document.addEventListener('DOMContentLoaded', function() {
+// Hamburger Menu Toggle - SIMPLIFIED VERSION
+let menuOpen = false;
+
+function toggleMobileMenu() {
     const hamburger = document.getElementById('hamburger-menu');
     const navMenu = document.getElementById('nav-menu');
-    const navOverlay = document.getElementById('nav-overlay');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const mobileOverlay = document.getElementById('mobile-overlay');
 
-    function toggleMenu() {
-        if (hamburger) hamburger.classList.toggle('active');
-        if (navMenu) navMenu.classList.toggle('active');
-        if (navOverlay) navOverlay.classList.toggle('active');
-        document.body.style.overflow = navMenu && navMenu.classList.contains('active') ? 'hidden' : '';
-    }
+    menuOpen = !menuOpen;
 
-    function closeMenu() {
-        if (hamburger) hamburger.classList.remove('active');
-        if (navMenu) navMenu.classList.remove('active');
-        if (navOverlay) navOverlay.classList.remove('active');
+    if (menuOpen) {
+        // Open menu
+        hamburger.classList.add('active');
+        navMenu.classList.add('active');
+        mobileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    } else {
+        // Close menu
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        mobileOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
+}
 
-    // Toggle menu when hamburger is clicked
-    if (hamburger) {
-        hamburger.addEventListener('click', toggleMenu);
-    }
+function closeMenu() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const navMenu = document.getElementById('nav-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
 
-    // Close menu when overlay is clicked
-    if (navOverlay) {
-        navOverlay.addEventListener('click', closeMenu);
-    }
+    menuOpen = false;
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-link');
 
     // Close menu when a nav link is clicked
     navLinks.forEach(link => {
@@ -41,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close menu on escape key
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        if (e.key === 'Escape' && menuOpen) {
             closeMenu();
         }
     });

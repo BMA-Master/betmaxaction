@@ -267,7 +267,7 @@
 
 /* Platform CTA Section */
 .platform-cta-section {
-    background: var(--bma-dark-200);
+    background: url('/betmaxaction/images/bma texture.jpg') center/cover no-repeat;
     padding: 80px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -640,7 +640,7 @@
 
 /* Gallery Section */
 .gallery-section {
-    background: var(--bma-dark-100);
+    background: url('/betmaxaction/images/bma texture.jpg') center/cover no-repeat;
     padding: 4rem 2rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
