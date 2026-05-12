@@ -1434,10 +1434,10 @@ body {
 
 .fp-product-logo {
     display: block;
-    height: 150px;
+    height: 195px;
     width: auto;
-    max-width: 520px;
-    margin-bottom: 1.5rem;
+    max-width: 640px;
+    margin: 0 auto 1.5rem;
     object-fit: contain;
 }
 
@@ -1732,7 +1732,7 @@ body {
     }
 
     .fp-product-logo {
-        height: 100px;
+        height: 135px;
     }
 }
 
