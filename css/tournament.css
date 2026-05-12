@@ -89,6 +89,7 @@
 /* ----- Copy column ----- */
 .bmt-hero-copy {
     position: relative;
+    z-index: 3;
 }
 
 .bmt-hero-eyebrow {
@@ -113,10 +114,10 @@
 
 .bmt-hero-logo {
     display: block;
-    height: 110px;
+    height: 145px;
     width: auto;
-    max-width: 460px;
-    margin-bottom: 1.5rem;
+    max-width: 520px;
+    margin: 0 auto 1.5rem;
     object-fit: contain;
     filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.5));
 }
@@ -286,6 +287,61 @@
     z-index: 0;
 }
 
+/* Decorative TD$, trophies, X marks emerging from behind the phone.
+   Container extends past the phone-stage edges so items can peek out
+   of the silhouette. All items z-index: 0 (behind .bmt-phone-img). */
+.bmt-phone-decor {
+    position: absolute;
+    inset: -8% -25% -8% -25%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bmt-decor-item {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* TD$ — many, scattered, mid-size */
+.bmt-decor-td {
+    width: clamp(40px, 9%, 78px);
+    opacity: 0.9;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.55));
+}
+
+.bmt-decor-td-1 { top: 2%;  left: 4%;   transform: rotate(-18deg); }
+.bmt-decor-td-2 { top: 6%;  right: 6%;  transform: rotate(14deg); width: clamp(34px, 7%, 60px); opacity: 0.78; }
+.bmt-decor-td-3 { top: 28%; left: 1%;   transform: rotate(-28deg); }
+.bmt-decor-td-4 { top: 44%; right: 2%;  transform: rotate(22deg); }
+.bmt-decor-td-5 { top: 70%; left: 3%;   transform: rotate(-10deg); width: clamp(48px, 10%, 88px); }
+.bmt-decor-td-6 { bottom: 4%; right: 8%; transform: rotate(26deg); }
+.bmt-decor-td-7 { bottom: 18%; left: 12%; transform: rotate(8deg); width: clamp(28px, 6%, 50px); opacity: 0.7; }
+
+/* Trophies — few, larger, more prominent */
+.bmt-decor-trophy {
+    width: clamp(58px, 14%, 120px);
+    opacity: 0.82;
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.6));
+}
+
+.bmt-decor-trophy-gold   { top: 14%; right: 0%;  transform: rotate(10deg); }
+.bmt-decor-trophy-silver { top: 18%; left: -2%;  transform: rotate(-12deg); opacity: 0.72; }
+.bmt-decor-trophy-bronze { bottom: 6%; right: 4%; transform: rotate(6deg); width: clamp(48px, 11%, 96px); opacity: 0.7; }
+
+/* X marks — subtle, smaller, accent */
+.bmt-decor-x {
+    width: clamp(26px, 6%, 56px);
+    opacity: 0.55;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
+}
+
+.bmt-decor-x-1 { top: 22%;   right: 16%;  transform: rotate(24deg); }
+.bmt-decor-x-2 { bottom: 38%; left: 14%;  transform: rotate(-32deg); }
+.bmt-decor-x-3 { bottom: 10%; right: 22%; transform: rotate(18deg); opacity: 0.45; }
+
 .bmt-phone-img {
     position: relative;
     z-index: 1;
@@ -319,8 +375,19 @@
         max-width: 280px;
     }
 
+    /* Tighter decor on mobile: hug the phone instead of extending far out. */
+    .bmt-phone-decor {
+        inset: -4% -8% -4% -8%;
+    }
+    .bmt-decor-td        { width: clamp(28px, 7%, 50px); }
+    .bmt-decor-td-5      { width: clamp(34px, 8%, 56px); }
+    .bmt-decor-td-7      { width: clamp(22px, 5%, 40px); }
+    .bmt-decor-trophy    { width: clamp(42px, 11%, 80px); }
+    .bmt-decor-trophy-bronze { width: clamp(36px, 9%, 64px); }
+    .bmt-decor-x         { width: clamp(20px, 5%, 38px); }
+
     .bmt-hero-logo {
-        height: 80px;
+        height: 105px;
     }
 
     .bmt-hero-actions {
