@@ -3851,6 +3851,8 @@ body {
     font-size: 0.95rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.78);
+    user-select: none;
+    -webkit-user-select: none;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 999px;
@@ -3979,6 +3981,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
     background:
         radial-gradient(circle at 30% 30%, rgba(0, 230, 118, 0.18) 0%, transparent 60%),
         radial-gradient(circle at 70% 70%, rgba(255, 215, 0, 0.16) 0%, transparent 60%),
@@ -5237,6 +5241,8 @@ body {
     margin-top: 2.5rem;
     padding: 1.25rem 0;
     overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.4) 100%);
