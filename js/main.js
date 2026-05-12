@@ -54,6 +54,40 @@ document.addEventListener('DOMContentLoaded', function() {
             closeMenu();
         }
     });
+
+    // Mega menu (click to toggle on mobile, outside-click + Esc to close)
+    const megaMenu = document.querySelector('.mega-menu');
+    if (megaMenu) {
+        const trigger = megaMenu.querySelector('.mega-menu-trigger');
+
+        if (trigger) {
+            trigger.addEventListener('click', function(e) {
+                // On narrow screens (mobile drawer): toggle the panel inline.
+                // On desktop: let the link navigate to /knowledge-base/ but also allow click-to-pin.
+                if (window.innerWidth <= 900) {
+                    e.preventDefault();
+                    megaMenu.classList.toggle('is-open');
+                    trigger.setAttribute('aria-expanded', megaMenu.classList.contains('is-open') ? 'true' : 'false');
+                }
+            });
+        }
+
+        // Close on outside click
+        document.addEventListener('click', function(e) {
+            if (!megaMenu.contains(e.target)) {
+                megaMenu.classList.remove('is-open');
+                if (trigger) trigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                megaMenu.classList.remove('is-open');
+                if (trigger) trigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
 });
 
 let currentTab = 'general';
@@ -256,6 +290,127 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Hero word rotator — types on/off through a list of words
+function initHeroRotator() {
+    const el = document.getElementById('heroRotator');
+    if (!el) return;
+
+    // Respect reduced-motion preference: leave first word static
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
+    const words = ['Scale', 'Engage', 'Go Viral', 'Retain', 'Compete', 'Grow Loyalty'];
+    let wordIdx = 0;
+    let charIdx = words[0].length;
+    let isDeleting = false;
+
+    const typeSpeed = 90;
+    const deleteSpeed = 45;
+    const pauseAfterWord = 1800;
+    const pauseAfterDelete = 250;
+    const initialDelay = 2200;
+
+    function tick() {
+        const word = words[wordIdx];
+        if (isDeleting) {
+            charIdx--;
+            el.textContent = word.slice(0, charIdx);
+            if (charIdx === 0) {
+                isDeleting = false;
+                wordIdx = (wordIdx + 1) % words.length;
+                setTimeout(tick, pauseAfterDelete);
+            } else {
+                setTimeout(tick, deleteSpeed);
+            }
+        } else {
+            charIdx++;
+            el.textContent = word.slice(0, charIdx);
+            if (charIdx === word.length) {
+                isDeleting = true;
+                setTimeout(tick, pauseAfterWord);
+            } else {
+                setTimeout(tick, typeSpeed);
+            }
+        }
+    }
+
+    // Start by erasing the initial "Scale" then cycle
+    setTimeout(function () {
+        isDeleting = true;
+        tick();
+    }, initialDelay);
+}
+
+document.addEventListener('DOMContentLoaded', initHeroRotator);
+
+// Industries tab switcher (Partnership section)
+function initIndustriesTabs() {
+    const tabs = document.querySelectorAll('.industries-tab');
+    const panels = document.querySelectorAll('.industries-panel');
+    if (tabs.length === 0 || panels.length === 0) return;
+
+    function activate(industry) {
+        tabs.forEach(t => {
+            const isActive = t.dataset.industry === industry;
+            t.classList.toggle('active', isActive);
+            t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        panels.forEach(p => {
+            const isActive = p.dataset.industry === industry;
+            if (isActive) {
+                p.removeAttribute('hidden');
+                p.classList.add('active');
+            } else {
+                p.setAttribute('hidden', '');
+                p.classList.remove('active');
+            }
+        });
+    }
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function () {
+            const industry = this.dataset.industry;
+            activate(industry);
+
+            // Scroll the active tab into view within its scroller
+            const scroller = this.closest('[data-industries-tabs-scroller]');
+            if (scroller) {
+                const tabRect = this.getBoundingClientRect();
+                const scrollerRect = scroller.getBoundingClientRect();
+                const offset = tabRect.left - scrollerRect.left - (scrollerRect.width / 2) + (tabRect.width / 2);
+                scroller.scrollBy({ left: offset, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Rail arrows (desktop)
+    const railWrap = document.querySelector('[data-industries-rail]');
+    if (railWrap) {
+        const scroller = railWrap.querySelector('[data-industries-tabs-scroller]');
+        const arrows = railWrap.querySelectorAll('[data-industries-rail-arrow]');
+
+        function updateOverflow() {
+            if (!scroller) return;
+            const overflowing = scroller.scrollWidth > scroller.clientWidth + 2;
+            railWrap.classList.toggle('is-overflowing', overflowing);
+        }
+
+        arrows.forEach(arrow => {
+            arrow.addEventListener('click', function () {
+                if (!scroller) return;
+                const direction = this.dataset.industriesRailArrow === 'next' ? 1 : -1;
+                scroller.scrollBy({ left: direction * scroller.clientWidth * 0.7, behavior: 'smooth' });
+            });
+        });
+
+        updateOverflow();
+        window.addEventListener('resize', updateOverflow);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initIndustriesTabs);
 
 // Intersection Observer for league logo animations
 document.addEventListener('DOMContentLoaded', function() {
