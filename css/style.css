@@ -6561,13 +6561,19 @@ body {
         padding: calc(2rem + 100px) 1.5rem 3rem !important;
     }
 
+    /* Even vertical rhythm in the CTA: equal gaps between headline →
+       accent line → subline → conveyor belt. */
     .cta-section h2 {
         margin-bottom: 2rem;
     }
 
     .cta-subline {
-        margin: 0 auto 2.5rem;
-        padding-top: 2.5rem;
+        margin: 0 auto 2rem !important;
+        padding-top: 2rem !important;
+    }
+
+    .cta-belt {
+        margin-top: 0;
     }
 
     /* Section headings - reduce large font sizes on mobile */
