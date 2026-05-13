@@ -816,14 +816,31 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Block-level row with a FIXED height so the rotator's animation can
+   never push surrounding lines up/down. Width is auto-sized but the
+   wrap doesn't break out of its own line. Content (rotator + cursor)
+   is left-aligned on desktop, matching the original look. */
 .hero-rotator-wrap {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 0.08em;
     white-space: nowrap;
-    min-width: 13ch;
+    height: 1.1em;
     min-height: 1.1em;
     line-height: 1.1;
+}
+
+@media (max-width: 900px) {
+    .hero-rotator-wrap {
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Hide the long hero description on mobile to keep the hero compact. */
+    .hero-description {
+        display: none;
+    }
 }
 
 .hero-rotator {
@@ -1684,15 +1701,7 @@ body {
 /* ----- Mobile ----- */
 @media (max-width: 900px) {
     .featured-product-section {
-        padding: 4rem 1.25rem 3.5rem;
-    }
-
-    .fp-header {
-        text-align: left;
-    }
-
-    .fp-eyebrow {
-        justify-content: flex-start;
+        padding: calc(1rem + 100px) 1.25rem 3.5rem !important;
     }
 
     .fp-card {
@@ -5039,7 +5048,7 @@ body {
 
 @media (max-width: 768px) {
     .technology-section {
-        padding: 4rem 1.25rem 3.5rem;
+        padding: 4rem 1.25rem calc(3.5rem + 100px);
     }
 
     /* Mobile: hide the 3x3 grid lines and stack as hub on top + 2-col spoke grid below */
@@ -5854,7 +5863,7 @@ body {
     }
 
     .nav-logo img {
-        height: 55px; /* Bigger, more readable logo */
+        height: 75px; /* Bigger, more readable logo */
     }
 
     /* Hamburger visible on mobile */
@@ -5996,17 +6005,18 @@ body {
     
     .hero-container {
         grid-template-columns: 1fr;
-        gap: 3rem;
+        gap: 1rem;
         text-align: center;
     }
-    
+
     .hero-title {
         font-size: 2.5rem;
+        margin-bottom: 0;
     }
-    
+
     .hero-right {
-        order: -1;
-        margin-bottom: 2rem;
+        order: 1;
+        margin-top: 0.5rem;
     }
 
     .hero-logo {
@@ -6541,9 +6551,23 @@ body {
     .platform-section,
     .max-value-section,
     .partnership-section,
-    .technology,
-    .cta-section {
+    .technology {
         padding: 2.5rem 1.5rem;
+    }
+
+    /* CTA needs extra top padding for the curve cap (100px overlap)
+       plus a measured gap to the headline. */
+    .cta-section {
+        padding: calc(2rem + 100px) 1.5rem 3rem !important;
+    }
+
+    .cta-section h2 {
+        margin-bottom: 2rem;
+    }
+
+    .cta-subline {
+        margin: 0 auto 2.5rem;
+        padding-top: 2.5rem;
     }
 
     /* Section headings - reduce large font sizes on mobile */
@@ -6683,7 +6707,8 @@ body {
     }
 
     .nav-logo img {
-        max-height: 35px;
+        height: 60px;
+        max-height: none;
     }
 
     /* Buttons Mobile */
@@ -6906,7 +6931,7 @@ body {
 
     /* Enterprise Technology section on small screens */
     .technology-section {
-        padding: 2rem 0;
+        padding: 2rem 0 calc(2rem + 100px);
     }
 
     .tech-content h2 {
