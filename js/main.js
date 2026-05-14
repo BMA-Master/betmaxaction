@@ -108,14 +108,23 @@ function switchGameTab(gameTabName) {
     currentGameTab = gameTabName;
 }
 
+let __popupScrollY = 0;
+
 function openContactPopup(tab = 'general') {
     const popup = document.getElementById('contactPopup');
     if (!popup) return false;
 
     popup.classList.add('active');
-    document.body.style.overflow = 'hidden';
 
-    // Always switch to the specified tab
+    // Robust scroll lock: save scroll position and pin body in place.
+    __popupScrollY = window.scrollY || window.pageYOffset || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${__popupScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.documentElement.style.overflow = 'hidden';
+
     switchTab(tab);
 
     return false;
@@ -123,7 +132,15 @@ function openContactPopup(tab = 'general') {
 
 function closeContactPopup() {
     document.getElementById('contactPopup').classList.remove('active');
-    document.body.style.overflow = '';
+
+    // Restore scroll lock + scroll position.
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    document.documentElement.style.overflow = '';
+    window.scrollTo(0, __popupScrollY);
 }
 
 // Vertical details data
