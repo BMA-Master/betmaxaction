@@ -3,21 +3,21 @@ let menuOpen = false;
 
 function toggleMobileMenu() {
     const hamburger = document.getElementById('hamburger-menu');
-    const navMenu = document.getElementById('nav-menu');
+    const drawer = document.getElementById('mobile-drawer');
     const mobileOverlay = document.getElementById('mobile-overlay');
 
     menuOpen = !menuOpen;
 
     if (menuOpen) {
-        // Open menu
         hamburger.classList.add('active');
-        navMenu.classList.add('active');
+        drawer.classList.add('active');
+        drawer.setAttribute('aria-hidden', 'false');
         mobileOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
     } else {
-        // Close menu
         hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+        drawer.classList.remove('active');
+        drawer.setAttribute('aria-hidden', 'true');
         mobileOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
@@ -25,13 +25,16 @@ function toggleMobileMenu() {
 
 function closeMenu() {
     const hamburger = document.getElementById('hamburger-menu');
-    const navMenu = document.getElementById('nav-menu');
+    const drawer = document.getElementById('mobile-drawer');
     const mobileOverlay = document.getElementById('mobile-overlay');
 
     menuOpen = false;
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-    mobileOverlay.classList.remove('active');
+    if (hamburger) hamburger.classList.remove('active');
+    if (drawer) {
+        drawer.classList.remove('active');
+        drawer.setAttribute('aria-hidden', 'true');
+    }
+    if (mobileOverlay) mobileOverlay.classList.remove('active');
     document.body.style.overflow = '';
 }
 
