@@ -4883,6 +4883,8 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
+    user-select: none;
+    -webkit-user-select: none;
     padding: 1rem;
     background:
         radial-gradient(circle at 30% 30%, rgba(0, 230, 118, 0.22) 0%, transparent 60%),
