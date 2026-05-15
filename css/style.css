@@ -2929,10 +2929,13 @@ body {
     overflow: hidden;
 }
 
-/* Shared edge stripe texture for the seamless zone (Max Value → Partnership → Technology) */
+/* Shared edge stripe texture for the seamless zone (Max Value → Partnership → Technology),
+   plus careers list + single job pages */
 .max-value-section::after,
 .partnership-section::after,
-.technology-section::after {
+.technology-section::after,
+.careers-listings::after,
+.career-detail-page::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -2982,7 +2985,9 @@ body {
 @media (max-width: 900px) {
     .max-value-section::after,
     .partnership-section::after,
-    .technology-section::after {
+    .technology-section::after,
+    .careers-listings::after,
+    .career-detail-page::after {
         display: none;
     }
 }
