@@ -533,6 +533,8 @@
 
 .career-card-head {
     margin-bottom: 1rem;
+    /* Leave room for the absolutely-positioned .career-card-logo. */
+    padding-right: 60px;
 }
 
 .career-card-dept {
