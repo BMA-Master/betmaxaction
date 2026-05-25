@@ -17,6 +17,23 @@
     overflow: hidden;
 }
 
+/* Branded XO playbook texture layered over the photo. Uses screen blend so
+   the dark areas of the texture drop out and only the green X/O/hatch
+   marks lift onto the photo. */
+.careers-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/Assets/Backgrounds/XO-BG-Green-2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    mix-blend-mode: screen;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+}
+
 @supports (-webkit-touch-callout: none) {
     .careers-hero { background-attachment: scroll, scroll; }
 }
