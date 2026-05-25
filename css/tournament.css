@@ -22,11 +22,12 @@
 .bmt-hero {
     position: relative;
     padding: 4rem 2rem 8rem;
-    background:
-        linear-gradient(135deg, rgba(8, 8, 8, 0.92) 0%, rgba(15, 15, 15, 0.82) 55%, rgba(46, 139, 87, 0.4) 100%),
-        url('/betmaxaction/images/How-To-Play-Hero-Optimized.png');
+    background-color: var(--bma-dark-100);
+    background-image:
+        linear-gradient(120deg, rgba(8, 8, 8, 0.92) 0%, rgba(15, 15, 15, 0.78) 50%, rgba(46, 139, 87, 0.4) 100%),
+        url('https://images.unsplash.com/photo-1775725181743-95a508495425?fm=jpg&q=80&w=3000&auto=format&fit=crop');
     background-size: cover, cover;
-    background-position: center center, center center;
+    background-position: center, center;
     background-repeat: no-repeat, no-repeat;
     background-attachment: scroll, fixed;
     overflow: hidden;
@@ -569,6 +570,240 @@
 
     .tournament-hero-logo img {
         max-width: 300px;
+    }
+}
+
+/* ==========================================================================
+   Game Modes showcase (six BMT formats, badge-driven row)
+   ========================================================================== */
+.game-modes-section {
+    position: relative;
+    background: var(--bma-dark-100);
+    padding: 6rem 2rem 5rem;
+    overflow: hidden;
+}
+
+.game-modes-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.game-modes-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+}
+
+.game-modes-glow-green {
+    width: 560px;
+    height: 560px;
+    top: -180px;
+    left: -160px;
+    background: radial-gradient(closest-side, rgba(0, 230, 118, 0.26), transparent);
+}
+
+.game-modes-glow-yellow {
+    width: 520px;
+    height: 520px;
+    bottom: -180px;
+    right: -160px;
+    background: radial-gradient(closest-side, rgba(255, 215, 0, 0.22), transparent);
+}
+
+.game-modes-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+}
+
+.game-modes-header {
+    text-align: center;
+    margin: 0 auto 3rem;
+    max-width: 760px;
+}
+
+.game-modes-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--bma-yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 1rem;
+}
+
+.game-modes-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--bma-green-bright), var(--bma-yellow));
+}
+
+.game-modes-headline {
+    font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+    font-weight: 900;
+    color: var(--bma-white);
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 1rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.game-modes-accent {
+    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.game-modes-subline {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.55;
+    margin: 0 auto;
+    max-width: 620px;
+}
+
+/* Grid uses subgrid so badge / name / tag rows line up across cards within
+   the same wrap-row regardless of how text wraps. Each .game-mode spans 3
+   parent rows so its three children inherit the shared row template. */
+.game-modes-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: min-content;
+    gap: 0.85rem 1.5rem;
+}
+
+.game-mode {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    row-gap: 0.85rem;
+    justify-items: center;
+    text-align: center;
+    padding: 0.5rem 0.25rem;
+}
+
+/* Stagger reveal on scroll into view. JS adds .stagger-ready to opt in
+   (prevents a flash for no-JS users) and .in-view to trigger. */
+.game-modes-grid.stagger-ready .game-mode {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.55s ease-out, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+.game-modes-grid.stagger-ready.in-view .game-mode {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .game-modes-grid.stagger-ready .game-mode {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+.game-mode-badge-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 140px;
+    aspect-ratio: 1;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.game-mode-badge {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.55));
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+.game-mode:hover .game-mode-badge-wrap {
+    transform: translateY(-4px) scale(1.04);
+}
+
+.game-mode-name {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--bma-white);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    margin: 0;
+    align-self: end;
+}
+
+.game-mode-tag {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.62);
+    line-height: 1.4;
+    margin: 0;
+    align-self: start;
+}
+
+/* Subgrid fallback: browsers without subgrid get content-sized rows, so we
+   reserve enough name/tag height with min-height to keep rows visually aligned. */
+@supports not (grid-template-rows: subgrid) {
+    .game-mode {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .game-mode-name {
+        min-height: 2.4em;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
+    .game-mode-tag {
+        min-height: 3.5em;
+    }
+}
+
+@media (max-width: 1100px) {
+    .game-modes-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .game-modes-section {
+        padding: 4rem 1.5rem 3rem;
+    }
+    .game-modes-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem 1rem;
+    }
+    .game-mode-badge-wrap {
+        max-width: 120px;
+    }
+    .game-modes-subline {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .game-modes-grid {
+        grid-template-columns: 1fr;
+    }
+    .game-mode-badge-wrap {
+        max-width: 130px;
     }
 }
 
@@ -4409,6 +4644,7 @@
    (matches the home seamless-zone treatment; excludes hero + sports conveyor)
    ========================================================================== */
 .gallery-section::after,
+.game-modes-section::after,
 .outcomes-section::after,
 .how-section::after,
 .pricing-section::after,
@@ -4418,18 +4654,20 @@
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    background-image: url('/images/Assets/Backgrounds/XO-BG-Green-2.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.6;
+    background-image: repeating-linear-gradient(
+        135deg,
+        transparent 0,
+        transparent 12px,
+        rgba(255, 255, 255, 0.04) 12px,
+        rgba(255, 255, 255, 0.04) 14px
+    );
     -webkit-mask-image:
         linear-gradient(
             90deg,
-            rgba(0, 0, 0, 0.95) 0%,
-            transparent 30%,
-            transparent 70%,
-            rgba(0, 0, 0, 0.95) 100%
+            rgba(0, 0, 0, 0.85) 0%,
+            transparent 28%,
+            transparent 72%,
+            rgba(0, 0, 0, 0.85) 100%
         ),
         linear-gradient(
             180deg,
@@ -4442,10 +4680,10 @@
     mask-image:
         linear-gradient(
             90deg,
-            rgba(0, 0, 0, 0.95) 0%,
-            transparent 30%,
-            transparent 70%,
-            rgba(0, 0, 0, 0.95) 100%
+            rgba(0, 0, 0, 0.85) 0%,
+            transparent 28%,
+            transparent 72%,
+            rgba(0, 0, 0, 0.85) 100%
         ),
         linear-gradient(
             180deg,
@@ -4457,15 +4695,9 @@
     mask-composite: intersect;
 }
 
-/* Alternate yellow variant on adjacent sections so the page has visual rhythm:
-   gallery (green) → outcomes (yellow) → how (green) → pricing (yellow) → cta (green) */
-.outcomes-section::after,
-.pricing-section::after {
-    background-image: url('/images/Assets/Backgrounds/XO-BG-Yellow-2.png');
-}
-
 @media (max-width: 900px) {
     .gallery-section::after,
+    .game-modes-section::after,
     .outcomes-section::after,
     .how-section::after,
     .pricing-section::after,

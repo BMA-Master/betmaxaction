@@ -457,6 +457,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+// Game modes badge stagger reveal on scroll into view
+document.addEventListener('DOMContentLoaded', function() {
+    const grid = document.querySelector('.game-modes-grid');
+    if (!grid || !('IntersectionObserver' in window)) return;
+
+    grid.querySelectorAll('.game-mode').forEach((mode, i) => {
+        mode.style.setProperty('--i', i);
+    });
+    grid.classList.add('stagger-ready');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -80px 0px'
+    });
+
+    observer.observe(grid);
+});
+
 // Entry Tab Switching (for Tournament Entry Points section)
 function switchEntryTab(tabName) {
     // Remove active class from all tab buttons
