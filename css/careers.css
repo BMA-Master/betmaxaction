@@ -267,11 +267,17 @@
 }
 
 .careers-hero-accent {
-    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 100%);
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 70%, #FFA500 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
     text-shadow: none;
+    transform: skewX(-6deg);
+    padding: 0 0.15em;
+    margin: 0 -0.15em;
+    filter: drop-shadow(0 2px 6px rgba(0, 230, 118, 0.25)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
 }
 
 .careers-hero-subline {
@@ -420,10 +426,16 @@
 }
 
 .careers-listings-accent {
-    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 100%);
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 70%, #FFA500 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
+    transform: skewX(-6deg);
+    padding: 0 0.15em;
+    margin: 0 -0.15em;
+    filter: drop-shadow(0 2px 6px rgba(0, 230, 118, 0.25));
 }
 
 /* ----- Filters ----- */
@@ -687,10 +699,16 @@
 }
 
 .careers-why-accent {
-    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 100%);
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 70%, #FFA500 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
+    transform: skewX(-6deg);
+    padding: 0 0.15em;
+    margin: 0 -0.15em;
+    filter: drop-shadow(0 2px 6px rgba(0, 230, 118, 0.25));
 }
 
 .careers-benefits-grid {

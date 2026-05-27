@@ -1120,13 +1120,17 @@ button,
 }
 
 .hero-rotator {
-    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 100%);
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 70%, #FFA500 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
     text-shadow: none;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
-    display: inline-block;
+    transform: skewX(-6deg);
+    padding: 0 0.15em;
+    margin: 0 -0.15em;
+    filter: drop-shadow(0 2px 6px rgba(0, 230, 118, 0.25)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
     min-width: 0.4ch;
     min-height: 1em;
     line-height: 1.1;
@@ -1672,10 +1676,16 @@ button,
 }
 
 .fp-headline-accent {
-    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 100%);
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 70%, #FFA500 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
+    transform: skewX(-6deg);
+    padding: 0 0.15em;
+    margin: 0 -0.15em;
+    filter: drop-shadow(0 2px 6px rgba(0, 230, 118, 0.25));
 }
 
 /* ----- Card (copy + phone, with stats nested inside) ----- */
@@ -3202,10 +3212,16 @@ button,
 }
 
 .mv-title-accent {
-    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 100%);
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 70%, #FFA500 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
+    transform: skewX(-6deg);
+    padding: 0 0.15em;
+    margin: 0 -0.15em;
+    filter: drop-shadow(0 2px 6px rgba(0, 230, 118, 0.25));
 }
 
 .mv-subline {
@@ -4179,10 +4195,16 @@ button,
 }
 
 .ps-headline-accent {
-    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 100%);
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 70%, #FFA500 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
+    transform: skewX(-6deg);
+    padding: 0 0.15em;
+    margin: 0 -0.15em;
+    filter: drop-shadow(0 2px 6px rgba(0, 230, 118, 0.25));
 }
 
 .ps-subline {
@@ -5680,12 +5702,17 @@ button,
 }
 
 .cta-accent {
-    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 100%);
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 70%, #FFA500 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
     text-shadow: none;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+    transform: skewX(-6deg);
+    padding: 0 0.15em;
+    margin: 0 -0.15em;
+    filter: drop-shadow(0 2px 6px rgba(0, 230, 118, 0.25)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
 }
 
 .cta-subline {
