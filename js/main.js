@@ -321,7 +321,7 @@ function initHeroRotator() {
         return;
     }
 
-    const words = ['Scale', 'Engage', 'Go Viral', 'Retain', 'Compete', 'Grow Loyalty'];
+    const words = ['Compete', 'Scale', 'Engage', 'Convert', 'Retain', 'Differentiate', 'Go Viral'];
     let wordIdx = 0;
     let charIdx = words[0].length;
     let isDeleting = false;
@@ -356,7 +356,7 @@ function initHeroRotator() {
         }
     }
 
-    // Start by erasing the initial "Scale" then cycle
+    // Start by erasing the initial "Compete" then cycle
     setTimeout(function () {
         isDeleting = true;
         tick();
@@ -455,6 +455,100 @@ document.addEventListener('DOMContentLoaded', function() {
         logoObserver.observe(logo);
     });
 
+});
+
+// Featured Product feature chips: clickable / hoverable popovers.
+// Popovers use position: fixed and are positioned by JS based on the chip's
+// bounding rect, so they escape ancestor overflow:hidden and clamp to viewport.
+document.addEventListener('DOMContentLoaded', function() {
+    const chips = document.querySelectorAll('.fp-feature');
+    if (!chips.length) return;
+
+    let activeChip = null;
+
+    function positionPopover(chip) {
+        const popover = chip.querySelector('.fp-feature-info');
+        if (!popover) return;
+
+        // Measure invisibly first so layout reflects final content size
+        popover.style.visibility = 'hidden';
+        popover.style.opacity = '0';
+        popover.classList.add('show');
+        const popRect = popover.getBoundingClientRect();
+        popover.classList.remove('show');
+        popover.style.visibility = '';
+        popover.style.opacity = '';
+
+        const chipRect = chip.getBoundingClientRect();
+        const margin = 12;
+
+        let left = chipRect.left + (chipRect.width / 2) - (popRect.width / 2);
+        if (left < margin) left = margin;
+        if (left + popRect.width > window.innerWidth - margin) {
+            left = window.innerWidth - margin - popRect.width;
+        }
+
+        let top = chipRect.top - popRect.height - 10;
+        if (top < margin) {
+            top = chipRect.bottom + 10;
+        }
+
+        popover.style.left = left + 'px';
+        popover.style.top = top + 'px';
+    }
+
+    function showPopover(chip) {
+        if (activeChip && activeChip !== chip) {
+            hidePopover(activeChip);
+        }
+        positionPopover(chip);
+        const popover = chip.querySelector('.fp-feature-info');
+        if (popover) popover.classList.add('show');
+        chip.classList.add('active');
+        chip.setAttribute('aria-expanded', 'true');
+        activeChip = chip;
+    }
+
+    function hidePopover(chip) {
+        const popover = chip.querySelector('.fp-feature-info');
+        if (popover) popover.classList.remove('show');
+        chip.classList.remove('active');
+        chip.setAttribute('aria-expanded', 'false');
+        if (activeChip === chip) activeChip = null;
+    }
+
+    chips.forEach(chip => {
+        chip.addEventListener('mouseenter', () => showPopover(chip));
+        chip.addEventListener('mouseleave', () => {
+            // Don't hide if it was clicked-active; only natural hover-out
+            if (!chip.matches(':focus-visible')) hidePopover(chip);
+        });
+        chip.addEventListener('focus', () => showPopover(chip));
+        chip.addEventListener('blur', () => hidePopover(chip));
+        chip.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (activeChip === chip) {
+                hidePopover(chip);
+            } else {
+                showPopover(chip);
+            }
+        });
+    });
+
+    document.addEventListener('click', () => {
+        if (activeChip) hidePopover(activeChip);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && activeChip) hidePopover(activeChip);
+    });
+
+    window.addEventListener('resize', () => {
+        if (activeChip) positionPopover(activeChip);
+    });
+    window.addEventListener('scroll', () => {
+        if (activeChip) positionPopover(activeChip);
+    }, { passive: true });
 });
 
 // Game modes badge stagger reveal on scroll into view
