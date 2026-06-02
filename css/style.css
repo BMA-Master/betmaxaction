@@ -801,17 +801,17 @@ button,
 }
 
 .hero-bg-image:nth-child(1) {
-    background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    background-image: url('https://images.unsplash.com/photo-1762013315117-1c8005ad2b41?fm=jpg&q=80&w=3000&auto=format&fit=crop');
     animation-delay: 0s;
 }
 
 .hero-bg-image:nth-child(2) {
-    background-image: url('https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    background-image: url('https://images.unsplash.com/photo-1766756467595-fd3f1f62d562?fm=jpg&q=80&w=3000&auto=format&fit=crop');
     animation-delay: 6.66s;
 }
 
 .hero-bg-image:nth-child(3) {
-    background-image: url('https://images.unsplash.com/photo-1560272564-c83b66b1ad12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    background-image: url('https://images.unsplash.com/photo-1759156207851-ff2c0a158797?fm=jpg&q=80&w=3000&auto=format&fit=crop');
     animation-delay: 13.33s;
 }
 
