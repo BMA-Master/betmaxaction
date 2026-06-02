@@ -551,6 +551,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
 });
 
+// Marquee/conveyor cloning — shared by BMT pools-sports rows and home CTA belt.
+// Clones each [data-sports-track]'s children until it's wide enough to loop
+// seamlessly via translateX(-50%), then sets animation-duration based on
+// measured track width so px/sec stays consistent across viewports.
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-sports-track]').forEach(function(track) {
+        if (!track.children.length || track.dataset.cloned) return;
+        track.dataset.cloned = 'true';
+        var originals = Array.from(track.children);
+        var minWidth = Math.max(window.innerWidth * 3, 1600);
+        var appended = 0;
+        while (track.scrollWidth < minWidth && appended < originals.length * 8) {
+            originals.forEach(function(el) {
+                var clone = el.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                track.appendChild(clone);
+                appended++;
+            });
+        }
+        if (appended === 0) {
+            originals.forEach(function(el) {
+                var clone = el.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                track.appendChild(clone);
+            });
+        }
+        var setDuration = function() {
+            var halfWidth = track.scrollWidth / 2;
+            if (halfWidth <= 0) return;
+            var isMobile = window.innerWidth <= 768;
+            var targetPxPerSec = isMobile ? 35 : 55;
+            var duration = halfWidth / targetPxPerSec;
+            track.style.animationDuration = duration.toFixed(1) + 's';
+        };
+        requestAnimationFrame(setDuration);
+        window.addEventListener('load', setDuration);
+        window.addEventListener('resize', setDuration);
+    });
+});
+
 // Game modes badge stagger reveal on scroll into view
 document.addEventListener('DOMContentLoaded', function() {
     const grid = document.querySelector('.game-modes-grid');
