@@ -5887,6 +5887,23 @@ button,
     font-variation-settings: 'wght' 500, 'opsz' 48;
 }
 
+/* Badge variant: full-bleed circular game-mode PNG art. Slightly larger
+   than the icon-glyph variant so the artwork stays legible at scroll size. */
+.cta-card-icon-badge {
+    width: clamp(52px, 5.5vw, 68px);
+    height: clamp(52px, 5.5vw, 68px);
+}
+
+.cta-card-icon-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    -webkit-user-drag: none;
+    user-drag: none;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+}
+
 .cta-card-label {
     font-size: clamp(0.78rem, 0.95vw, 0.95rem);
     font-weight: 800;
