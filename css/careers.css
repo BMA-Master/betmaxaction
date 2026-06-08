@@ -20,20 +20,6 @@
 /* Branded XO playbook texture layered over the photo. Uses screen blend so
    the dark areas of the texture drop out and only the green X/O/hatch
    marks lift onto the photo. */
-.careers-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/images/Assets/Backgrounds/XO-BG-Green-2.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    mix-blend-mode: screen;
-    opacity: 0.55;
-    pointer-events: none;
-    z-index: 0;
-}
-
 @supports (-webkit-touch-callout: none) {
     .careers-hero { background-attachment: scroll, scroll; }
 }
@@ -138,6 +124,26 @@
     color: var(--bma-green-bright);
     text-transform: uppercase;
     letter-spacing: 0.04em;
+}
+
+/* Long-form prose block (markdown body rendered from the .md page content). */
+.career-detail-prose {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.65;
+    font-size: 1rem;
+}
+
+.career-detail-prose p {
+    margin: 0 0 1.25rem;
+}
+
+.career-detail-prose p:last-child {
+    margin-bottom: 0;
+}
+
+.career-detail-prose strong {
+    color: var(--bma-yellow);
+    font-weight: 800;
 }
 
 .career-detail-cta-block {
