@@ -768,7 +768,12 @@ button,
 
 /* Hero Section */
 .hero {
-    padding: 3rem 2rem 4rem;
+    /* Bottom padding is calc(2rem + 100px) because the featured-product-cap
+       SVG (margin-top: -100px) and the featured-product-section (also
+       margin-top: -100px) both overlap into the hero's bottom 100px. Anything
+       less than 100px here lets hero content (title, rotator on mobile, etc.)
+       collide with the curve. The 2rem is the visible clearance below content. */
+    padding: 3rem 2rem calc(2rem + 100px);
     position: relative;
     min-height: 45vh;
     display: flex;
