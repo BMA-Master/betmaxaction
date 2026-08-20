@@ -93,7 +93,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-let currentTab = 'general';
 let currentGameTab = 'tournament';
 
 function switchGameTab(gameTabName) {
@@ -106,41 +105,6 @@ function switchGameTab(gameTabName) {
     document.getElementById(`${gameTabName}-content`).classList.add('active');
 
     currentGameTab = gameTabName;
-}
-
-let __popupScrollY = 0;
-
-function openContactPopup(tab = 'general') {
-    const popup = document.getElementById('contactPopup');
-    if (!popup) return false;
-
-    popup.classList.add('active');
-
-    // Robust scroll lock: save scroll position and pin body in place.
-    __popupScrollY = window.scrollY || window.pageYOffset || 0;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${__popupScrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
-    document.documentElement.style.overflow = 'hidden';
-
-    switchTab(tab);
-
-    return false;
-}
-
-function closeContactPopup() {
-    document.getElementById('contactPopup').classList.remove('active');
-
-    // Restore scroll lock + scroll position.
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.width = '';
-    document.documentElement.style.overflow = '';
-    window.scrollTo(0, __popupScrollY);
 }
 
 // Vertical details data
@@ -252,66 +216,7 @@ function closeVerticalDetails() {
     });
 }
 
-function switchTab(tabName) {
-    // Remove active from all tabs and content
-    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-    // Add active to selected tab button
-    const tabButton = document.querySelector(`[onclick="switchTab('${tabName}')"]`);
-    if (tabButton) {
-        tabButton.classList.add('active');
-    }
-
-    // Add active to selected tab content
-    const tabContent = document.getElementById(`${tabName}-tab`);
-    if (tabContent) {
-        tabContent.classList.add('active');
-    }
-
-    currentTab = tabName;
-}
-
-function handleFormSubmit(event, formType) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
-    data.formType = formType;
-
-    // Show success message
-    alert(`Thank you for your ${formType} inquiry! We'll get back to you within 24 hours.`);
-
-    // Reset form and close popup
-    event.target.reset();
-    closeContactPopup();
-
-    // Here you would typically send the data to your server
-    console.log('Form submitted:', data);
-}
-
-// Close popup when clicking outside and on Escape key
-document.addEventListener('DOMContentLoaded', function() {
-    const contactPopup = document.getElementById('contactPopup');
-
-    if (contactPopup) {
-        // Close popup when clicking outside
-        contactPopup.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeContactPopup();
-            }
-        });
-    }
-
-    // Close popup on Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeContactPopup();
-        }
-    });
-});
-
-// Hero word rotator — types on/off through a list of words
+// Hero word rotator: types on/off through a list of words
 function initHeroRotator() {
     const el = document.getElementById('heroRotator');
     if (!el) return;
@@ -551,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
 });
 
-// Marquee/conveyor cloning — shared by BMT pools-sports rows and home CTA belt.
+// Marquee/conveyor cloning: shared by BMT pools-sports rows and home CTA belt.
 // Clones each [data-sports-track]'s children until it's wide enough to loop
 // seamlessly via translateX(-50%), then sets animation-duration based on
 // measured track width so px/sec stays consistent across viewports.

@@ -1,0 +1,278 @@
+/* ==========================================================================
+   Contact page
+   Hero + curve cap + inline magnet slot. Mirrors the platform/careers hero
+   pattern (dark photo hero, corner glows, curve cap into a flat dark section)
+   so the page reads as part of the site rather than a bolted-on form page.
+   ========================================================================== */
+
+/* ----- Hero ----- */
+.contact-hero {
+    position: relative;
+    padding: 4rem 2rem 7rem;
+    background-color: var(--bma-dark-100);
+    background-image:
+        linear-gradient(120deg, rgba(8, 8, 8, 0.92) 0%, rgba(15, 15, 15, 0.78) 50%, rgba(46, 139, 87, 0.4) 100%),
+        url('https://images.unsplash.com/photo-1549333580-4cb2c5c8e421?fm=jpg&q=80&w=3000&auto=format&fit=crop');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    background-attachment: scroll, fixed;
+    overflow: hidden;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .contact-hero { background-attachment: scroll, scroll; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contact-hero { background-attachment: scroll, scroll; }
+}
+
+.contact-hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.contact-hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.45;
+}
+
+.contact-hero-glow-green {
+    width: 540px;
+    height: 540px;
+    top: -160px;
+    right: -160px;
+    background: radial-gradient(closest-side, rgba(0, 230, 118, 0.3), transparent);
+}
+
+.contact-hero-glow-yellow {
+    width: 480px;
+    height: 480px;
+    bottom: -140px;
+    left: -140px;
+    background: radial-gradient(closest-side, rgba(255, 215, 0, 0.22), transparent);
+}
+
+.contact-hero-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+}
+
+.contact-hero-breadcrumb {
+    margin-bottom: 2rem;
+}
+
+.contact-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--bma-yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 1.25rem;
+}
+
+.contact-hero-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--bma-green-bright), var(--bma-yellow));
+}
+
+.contact-hero-headline {
+    font-size: clamp(2rem, 4.2vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--bma-white);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.5rem;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    max-width: 880px;
+}
+
+.contact-hero-accent {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--bma-green-bright) 0%, var(--bma-yellow) 70%, #FFA500 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-shadow: none;
+    transform: skewX(-6deg);
+    padding: 0 0.15em;
+    margin: 0 -0.15em;
+    filter: drop-shadow(0 2px 6px rgba(0, 230, 118, 0.25)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
+}
+
+.contact-hero-subline {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: 0.65rem;
+    padding: 0.85rem 1.25rem 0.85rem 1.1rem;
+    width: fit-content;
+    max-width: 640px;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.92);
+    background: linear-gradient(135deg, rgba(0, 230, 118, 0.1) 0%, rgba(255, 215, 0, 0.06) 100%), rgba(15, 15, 15, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.contact-hero-subline-icon {
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--bma-green-bright);
+    font-variation-settings: 'wght' 500, 'opsz' 24;
+}
+
+/* ----- Hero to conversation curve cap (stroke only, overlaps hero bottom) ----- */
+.contact-cap {
+    display: block;
+    width: 100%;
+    height: 100px;
+    margin-top: -100px;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+    filter: drop-shadow(0 -4px 18px rgba(0, 230, 118, 0.32));
+}
+
+/* ----- Conversation section ----- */
+.contact-main {
+    position: relative;
+    z-index: 1;
+    background: var(--bma-dark-100);
+    padding: calc(2rem + 100px) 2rem 5rem;
+    margin-top: -100px;
+    overflow: hidden;
+    -webkit-mask-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 50' preserveAspectRatio='none'><path d='M0,50 Q720,-30 1440,50 L1440,50 L0,50 Z' fill='white'/></svg>"),
+        linear-gradient(white, white);
+    -webkit-mask-size: 100% 50px, 100% calc(100% - 50px);
+    -webkit-mask-position: top, left bottom;
+    -webkit-mask-repeat: no-repeat;
+    mask-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 50' preserveAspectRatio='none'><path d='M0,50 Q720,-30 1440,50 L1440,50 L0,50 Z' fill='white'/></svg>"),
+        linear-gradient(white, white);
+    mask-size: 100% 50px, 100% calc(100% - 50px);
+    mask-position: top, left bottom;
+    mask-repeat: no-repeat;
+}
+
+.contact-main-container {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    text-align: center;
+}
+
+/* The magnet renders itself into [data-m5m-inline] inside a shadow root.
+   The slot is sized up front (min-height >= the SDK's 520px card + padding)
+   so nothing below it shifts when the script lands. */
+.contact-magnet-slot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 560px;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: linear-gradient(135deg, rgba(0, 230, 118, 0.08) 0%, rgba(255, 215, 0, 0.05) 100%), rgba(20, 20, 20, 0.9);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+}
+
+/* Green-to-yellow accent rule along the top edge (site signature). */
+.contact-magnet-slot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--bma-green-bright), var(--bma-yellow));
+    box-shadow: 0 0 14px rgba(0, 230, 118, 0.45);
+}
+
+.contact-magnet-slot > div[data-m5m-inline] {
+    width: 100%;
+    max-width: 640px;
+    min-height: 520px;
+    margin: 0 auto;
+}
+
+/* ----- Email fallback ----- */
+.contact-fallback {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 2rem auto 0;
+    font-size: 0.98rem;
+    color: var(--bma-gray-400);
+}
+
+.contact-fallback-icon {
+    font-size: 20px;
+    color: var(--bma-green-bright);
+    font-variation-settings: 'wght' 500, 'opsz' 24;
+}
+
+.contact-fallback a {
+    color: var(--bma-yellow);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.35);
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-fallback a:hover {
+    color: var(--bma-yellow-bright);
+    border-bottom-color: var(--bma-yellow-bright);
+}
+
+/* ----- Mobile ----- */
+@media (max-width: 768px) {
+    .contact-hero {
+        /* Bottom padding must clear the .contact-cap (100px) plus buffer so
+           the curve does not slice into the subline panel. */
+        padding: 2.5rem 1.25rem 8rem;
+    }
+
+    .contact-hero-headline {
+        font-size: clamp(1.75rem, 7vw, 2.2rem);
+        line-height: 1.2;
+    }
+
+    .contact-hero-subline {
+        width: auto;
+        font-size: 0.94rem;
+    }
+
+    .contact-main {
+        padding: calc(1.5rem + 100px) 1.25rem 3.5rem;
+    }
+
+    .contact-magnet-slot {
+        min-height: 540px;
+        padding: 0.75rem;
+        border-radius: 16px;
+    }
+}

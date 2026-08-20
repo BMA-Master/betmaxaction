@@ -72,7 +72,7 @@ body {
     scrollbar-color: var(--bma-yellow) rgba(20, 20, 20, 0.9);
 }
 
-/* Prevent text selection on interactive buttons / CTAs across the site —
+/* Prevent text selection on interactive buttons / CTAs across the site.
    keeps clicks and taps working, just blocks the label text from being
    selected/highlighted (and on iOS, suppresses the long-press callout).
    Also covers decorative inline icons (check marks, capability icons, etc.)
@@ -1714,7 +1714,7 @@ button,
     overflow: hidden;
 }
 
-/* Mobile / iOS Safari fallback — fixed bg breaks on iOS */
+/* Mobile / iOS Safari fallback : fixed bg breaks on iOS */
 @supports (-webkit-touch-callout: none) {
     .fp-card {
         background-attachment: scroll, scroll;
@@ -1828,7 +1828,7 @@ button,
     min-width: 0;
 }
 
-/* Popover info — position: fixed so it escapes any ancestor overflow:hidden.
+/* Popover info - position: fixed so it escapes any ancestor overflow:hidden.
    JS sets left/top dynamically based on the chip's bounding rect. */
 .fp-feature-info {
     position: fixed;
@@ -1892,7 +1892,7 @@ button,
     transform: translateX(2px);
 }
 
-/* ----- Phone column (no double frame — image already includes mockup) ----- */
+/* ----- Phone column (no double frame - image already includes mockup) ----- */
 .fp-visual {
     display: flex;
     align-items: center;
@@ -1905,7 +1905,7 @@ button,
     max-width: 460px;
 }
 
-/* Diagonal stripe patterns (green top-right, yellow bottom-left) — from BMT hero treatment */
+/* Diagonal stripe patterns (green top-right, yellow bottom-left) - from BMT hero treatment */
 .fp-phone-stage::before,
 .fp-phone-stage::after {
     content: '';
@@ -4279,7 +4279,7 @@ button,
 }
 
 /* ==========================================================================
-   Industries — tabbed showcase
+   Industries : tabbed showcase
    ========================================================================== */
 .industries-showcase {
     margin-bottom: 5rem;
@@ -4662,7 +4662,7 @@ button,
 }
 
 /* ==========================================================================
-   Capabilities — modernized grid
+   Capabilities : modernized grid
    ========================================================================== */
 .capabilities-grid-modern {
     display: grid;
@@ -5745,6 +5745,75 @@ button,
     box-shadow: 0 0 12px rgba(0, 230, 118, 0.5);
 }
 
+/* ----- Inline magnet slot (the section's conversion mechanism) -----
+   The magnet renders itself into [data-m5m-inline] inside a shadow root.
+   The slot is sized up front (min-height >= the SDK's 520px card + padding)
+   so the belt below it never jumps when the script lands. */
+.cta-magnet {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 2.5rem auto 0;
+}
+
+.cta-magnet-label {
+    margin: 0 0 1rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bma-yellow);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.cta-magnet-slot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 560px;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: linear-gradient(135deg, rgba(0, 230, 118, 0.08) 0%, rgba(255, 215, 0, 0.05) 100%), rgba(10, 10, 10, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+}
+
+/* Green-to-yellow accent rule along the top edge (same signature as
+   .cta-subline::before, kept as a pseudo-element so border-radius survives). */
+.cta-magnet-slot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--bma-green-bright), var(--bma-yellow));
+    box-shadow: 0 0 14px rgba(0, 230, 118, 0.45);
+}
+
+.cta-magnet-slot > div[data-m5m-inline] {
+    width: 100%;
+    max-width: 640px;
+    min-height: 520px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .cta-magnet {
+        margin-top: 2rem;
+    }
+
+    .cta-magnet-slot {
+        min-height: 540px;
+        padding: 0.75rem;
+        border-radius: 16px;
+    }
+}
+
 .cta-section .btn-primary {
     background: var(--bma-green);
     color: var(--bma-white);
@@ -5774,7 +5843,7 @@ button,
     display: flex;
     flex-direction: column;
     gap: clamp(0.75rem, 1.5vw, 1.25rem);
-    /* Side fade + top/bottom fade via intersected masks — the belt itself
+    /* Side fade + top/bottom fade via intersected masks - the belt itself
        (dark background and the cards) fades to transparent on all four edges. */
     -webkit-mask-image:
         linear-gradient(
