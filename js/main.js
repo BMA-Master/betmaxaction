@@ -1,97 +1,81 @@
-// Hamburger Menu Toggle - SIMPLIFIED VERSION
-let menuOpen = false;
+// Main navigation (Mach Five Magnet pattern): click-to-open panels on
+// desktop, a full-screen overlay under the bar on phones. Markup lives in
+// layouts/partials/header.html; styles under "Main navigation" in style.css.
+(function () {
+    var header = document.querySelector('[data-bma-nav]');
+    if (!header) return;
 
-function toggleMobileMenu() {
-    const hamburger = document.getElementById('hamburger-menu');
-    const drawer = document.getElementById('mobile-drawer');
-    const mobileOverlay = document.getElementById('mobile-overlay');
+    // --- Mega panels (Products, Company) ---
+    var menus = Array.prototype.slice.call(header.querySelectorAll('[data-mega-menu]'));
 
-    menuOpen = !menuOpen;
-
-    if (menuOpen) {
-        hamburger.classList.add('active');
-        drawer.classList.add('active');
-        drawer.setAttribute('aria-hidden', 'false');
-        mobileOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    } else {
-        hamburger.classList.remove('active');
-        drawer.classList.remove('active');
-        drawer.setAttribute('aria-hidden', 'true');
-        mobileOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+    function closeMenu(root) {
+        var panel = root.querySelector('[data-mega-panel]');
+        var trigger = root.querySelector('[data-mega-trigger]');
+        var chevron = root.querySelector('[data-mega-chevron]');
+        panel.classList.remove('is-open');
+        if (chevron) chevron.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
     }
-}
 
-function closeMenu() {
-    const hamburger = document.getElementById('hamburger-menu');
-    const drawer = document.getElementById('mobile-drawer');
-    const mobileOverlay = document.getElementById('mobile-overlay');
+    function closeAllMenus() { menus.forEach(closeMenu); }
 
-    menuOpen = false;
-    if (hamburger) hamburger.classList.remove('active');
-    if (drawer) {
-        drawer.classList.remove('active');
-        drawer.setAttribute('aria-hidden', 'true');
-    }
-    if (mobileOverlay) mobileOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    // Close menu when a nav link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Don't close if clicking on dropdown parent
-            if (!this.textContent.includes('▼')) {
-                closeMenu();
+    menus.forEach(function (root) {
+        var panel = root.querySelector('[data-mega-panel]');
+        var trigger = root.querySelector('[data-mega-trigger]');
+        var chevron = root.querySelector('[data-mega-chevron]');
+        trigger.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var open = panel.classList.contains('is-open');
+            closeAllMenus();
+            if (!open) {
+                panel.classList.add('is-open');
+                if (chevron) chevron.classList.add('is-open');
+                trigger.setAttribute('aria-expanded', 'true');
             }
         });
     });
 
-    // Close menu on escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && menuOpen) {
-            closeMenu();
-        }
+    document.addEventListener('click', function (e) {
+        if (!menus.some(function (m) { return m.contains(e.target); })) closeAllMenus();
     });
 
-    // Mega menu (click to toggle on mobile, outside-click + Esc to close)
-    const megaMenu = document.querySelector('.mega-menu');
-    if (megaMenu) {
-        const trigger = megaMenu.querySelector('.mega-menu-trigger');
+    // --- Mobile overlay ---
+    var burger = header.querySelector('[data-nav-burger]');
+    var overlay = header.querySelector('[data-nav-mobile]');
 
-        if (trigger) {
-            trigger.addEventListener('click', function(e) {
-                // On narrow screens (mobile drawer): toggle the panel inline.
-                // On desktop: let the link navigate to /knowledge-base/ but also allow click-to-pin.
-                if (window.innerWidth <= 900) {
-                    e.preventDefault();
-                    megaMenu.classList.toggle('is-open');
-                    trigger.setAttribute('aria-expanded', megaMenu.classList.contains('is-open') ? 'true' : 'false');
-                }
-            });
-        }
+    function setOverlay(open) {
+        overlay.classList.toggle('is-open', open);
+        burger.classList.toggle('is-open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        overlay.setAttribute('aria-hidden', open ? 'false' : 'true');
+        document.documentElement.style.overflow = open ? 'hidden' : '';
+    }
 
-        // Close on outside click
-        document.addEventListener('click', function(e) {
-            if (!megaMenu.contains(e.target)) {
-                megaMenu.classList.remove('is-open');
-                if (trigger) trigger.setAttribute('aria-expanded', 'false');
-            }
+    if (burger && overlay) {
+        burger.addEventListener('click', function () {
+            setOverlay(!overlay.classList.contains('is-open'));
         });
-
-        // Close on Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                megaMenu.classList.remove('is-open');
-                if (trigger) trigger.setAttribute('aria-expanded', 'false');
-            }
+        overlay.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', function () { setOverlay(false); });
+        });
+        // Leaving the phone breakpoint with the overlay open would leave the
+        // document scroll-locked; release it.
+        window.addEventListener('resize', function () {
+            if (window.innerWidth >= 900 && overlay.classList.contains('is-open')) setOverlay(false);
         });
     }
-});
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        closeAllMenus();
+        if (overlay && overlay.classList.contains('is-open')) setOverlay(false);
+    });
+
+    // Older templates call closeMenu() from inline handlers.
+    window.closeMenu = function () { if (overlay) setOverlay(false); closeAllMenus(); };
+    window.toggleMobileMenu = function () { if (overlay) setOverlay(!overlay.classList.contains('is-open')); };
+})();
 
 let currentGameTab = 'tournament';
 
@@ -226,7 +210,7 @@ function initHeroRotator() {
         return;
     }
 
-    const words = ['Compete', 'Scale', 'Engage', 'Convert', 'Retain', 'Differentiate', 'Go Viral'];
+    const words = ['Scale', 'Compete', 'Engage', 'Convert', 'Retain', 'Differentiate', 'Go Viral'];
     let wordIdx = 0;
     let charIdx = words[0].length;
     let isDeleting = false;

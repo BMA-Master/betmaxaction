@@ -1,0 +1,632 @@
+/* ==========================================================================
+   deck.css : the collateral deck design system, ported to the web.
+
+   Source of truth: betmaxtourney_hugo/collateral/bmt-casino-operators/deck.html
+   (and athlete-partners/deck.html, same system). Montserrat display type,
+   Inter body, near-black surfaces, flat 1px-line cards, green/yellow kicker
+   labels, outlined chips, dot lists, numbered step pills, icon tiles, the
+   gradient accent word, and the pre-shaded TD$ bill art as page background.
+
+   The web version can use what the PDF exporter could not (background-clip
+   text, blur, alpha gradients), so accent words are live text here instead
+   of the deck's rasterized PNGs.
+
+   Loaded on the home page and on every partner-program page. Everything is
+   prefixed dk- so it never collides with style.css.
+   ========================================================================== */
+
+:root {
+    --dk-green: #00E676;
+    --dk-yellow: #FFD700;
+    --dk-orange: #FFA500;
+    --dk-red: #DC143C;
+    --dk-mft-orange: #EF2C03;
+
+    --dk-bg: #0a0a0a;
+    --dk-bg-2: #141414;
+    --dk-bg-3: #1c1c1c;
+    --dk-bg-4: #1f1f1f;
+
+    --dk-white: #fafafa;
+    --dk-text: rgba(250, 250, 250, 0.92);
+    --dk-text-2: rgba(250, 250, 250, 0.78);
+    --dk-text-3: rgba(250, 250, 250, 0.6);
+
+    --dk-line: rgba(255, 255, 255, 0.14);
+    --dk-line-soft: rgba(255, 255, 255, 0.08);
+    --dk-line-green: rgba(0, 230, 118, 0.35);
+    --dk-line-yellow: rgba(255, 215, 0, 0.45);
+
+    --dk-font-display: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --dk-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --dk-radius: 12px;
+    --dk-radius-sm: 10px;
+
+    --dk-accent-gradient: linear-gradient(135deg, #00E676 0%, #FFD700 70%, #FFA500 100%);
+    --dk-rule-gradient: linear-gradient(90deg, #00E676 0%, #FFD700 70%, #FFA500 100%);
+
+    /* The deck's page shade over the TD$ bill art: flat 0.86 to 70% of the
+       page, then a ramp to 0.95 so footers sit on near-black. */
+    --dk-bills-shade-page: linear-gradient(180deg, rgba(10, 10, 10, 0.86) 0%, rgba(10, 10, 10, 0.86) 70%, rgba(10, 10, 10, 0.95) 100%);
+    /* The cover shade: lighter (0.76) so the bills read, bottom fade to 0.96. */
+    --dk-bills-shade-cover: linear-gradient(180deg, rgba(6, 6, 6, 0.76) 0%, rgba(6, 6, 6, 0.76) 62%, rgba(6, 6, 6, 0.96) 100%);
+}
+
+/* ----- Backgrounds ------------------------------------------------------ */
+.dk-bg-bills {
+    background-color: var(--dk-bg);
+    background-image: var(--dk-bills-shade-page), url('/images/deck/bg-bills.jpg');
+    background-size: cover, cover;
+    background-position: center, center 30%;
+    background-repeat: no-repeat;
+}
+
+.dk-bg-bills--cover {
+    background-image: var(--dk-bills-shade-cover), url('/images/deck/bg-bills.jpg');
+}
+
+/* ----- Type ------------------------------------------------------------- */
+.dk-h1,
+.dk-h2,
+.dk-h3 {
+    font-family: var(--dk-font-display);
+    color: var(--dk-white);
+    line-height: 1.08;
+    margin: 0;
+}
+
+.dk-h1 {
+    font-size: clamp(2.4rem, 4.8vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    line-height: 1.04;
+}
+
+.dk-h2 {
+    font-size: clamp(1.9rem, 3.6vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+}
+
+.dk-h3 {
+    font-size: clamp(1.15rem, 1.4vw, 1.4rem);
+    font-weight: 800;
+    letter-spacing: -0.005em;
+}
+
+/* Kicker: the deck's h4. Small, letterspaced, uppercase, green by default. */
+.dk-kicker {
+    display: inline-block;
+    font-family: var(--dk-font-display);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dk-green);
+    margin: 0 0 0.6rem;
+    line-height: 1.3;
+}
+
+.dk-kicker--y {
+    color: var(--dk-yellow);
+}
+
+.dk-kicker--muted {
+    color: var(--dk-text-2);
+}
+
+/* The gradient accent word. Live text on the web. */
+.dk-accent {
+    display: inline-block;
+    background: var(--dk-accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-shadow: none;
+    padding-right: 0.06em;
+    margin-right: -0.06em;
+}
+
+.dk-g { color: var(--dk-green); }
+.dk-y { color: var(--dk-yellow); }
+
+.dk-lede {
+    font-family: var(--dk-font-body);
+    font-size: clamp(1.02rem, 1.1vw, 1.2rem);
+    line-height: 1.55;
+    color: var(--dk-text);
+    max-width: 62ch;
+    margin: 0;
+}
+
+.dk-muted {
+    color: var(--dk-text-2);
+}
+
+.dk-small {
+    font-size: 0.88rem;
+}
+
+/* ----- Surfaces --------------------------------------------------------- */
+.dk-card {
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line);
+    border-radius: var(--dk-radius);
+    padding: 1.5rem 1.6rem;
+}
+
+.dk-card p {
+    color: var(--dk-text);
+    line-height: 1.55;
+}
+
+.dk-card--green {
+    border-color: var(--dk-line-green);
+}
+
+.dk-card--yellow {
+    border-color: var(--dk-line-yellow);
+}
+
+/* Bordered statement box (the deck's "band"). */
+.dk-box {
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line-green);
+    border-radius: var(--dk-radius);
+    padding: 1.25rem 1.5rem;
+}
+
+.dk-box .dk-kicker {
+    margin-bottom: 0.4rem;
+}
+
+.dk-box p {
+    margin: 0;
+    color: var(--dk-text);
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+.dk-box--y {
+    border-color: var(--dk-line-yellow);
+}
+
+.dk-box--y .dk-kicker {
+    color: var(--dk-yellow);
+}
+
+/* ----- Chips and tags --------------------------------------------------- */
+.dk-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.dk-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--dk-font-display);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--dk-green);
+    padding: 0.38rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--dk-line-green);
+    background: rgba(0, 230, 118, 0.06);
+    white-space: nowrap;
+    line-height: 1.1;
+}
+
+.dk-chip--y {
+    color: var(--dk-yellow);
+    border-color: var(--dk-line-yellow);
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.dk-chip--solid {
+    color: #0a0a0a;
+    background: var(--dk-green);
+    border-color: var(--dk-green);
+}
+
+.dk-tag {
+    display: inline-block;
+    font-family: var(--dk-font-display);
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dk-yellow);
+    padding: 0.32rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--dk-line-yellow);
+    background: rgba(255, 215, 0, 0.06);
+    line-height: 1.1;
+}
+
+/* ----- Lists ------------------------------------------------------------ */
+.dk-dots {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dk-dots li {
+    position: relative;
+    padding-left: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: var(--dk-text);
+    font-size: 0.98rem;
+    line-height: 1.45;
+}
+
+.dk-dots li:last-child {
+    margin-bottom: 0;
+}
+
+.dk-dots li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--dk-green);
+}
+
+.dk-dots--y li::before {
+    background: var(--dk-yellow);
+}
+
+/* ----- Numbered step pill (01, 02...) ----------------------------------- */
+.dk-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.6rem;
+    height: 1.55rem;
+    padding: 0 0.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--dk-line);
+    background: var(--dk-bg-4);
+    color: var(--dk-green);
+    font-family: var(--dk-font-display);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    line-height: 1;
+}
+
+/* ----- Icon tile -------------------------------------------------------- */
+.dk-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: var(--dk-bg-3);
+    border: 1px solid var(--dk-line-green);
+    color: var(--dk-green);
+}
+
+.dk-icon .material-symbols-outlined {
+    font-size: 24px;
+    line-height: 1;
+    font-variation-settings: 'wght' 400, 'opsz' 24;
+}
+
+.dk-icon svg {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
+.dk-icon--y {
+    border-color: var(--dk-line-yellow);
+    color: var(--dk-yellow);
+}
+
+/* ----- Buttons (BMT site pills) ----------------------------------------- */
+.dk-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: linear-gradient(90deg, var(--dk-green) 0%, var(--dk-yellow) 100%);
+    color: #0a0a0a;
+    font-family: var(--dk-font-display);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, gap 0.2s ease;
+}
+
+.dk-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 230, 118, 0.25);
+    gap: 0.8rem;
+    color: #0a0a0a;
+}
+
+.dk-btn svg,
+.dk-btn .material-symbols-outlined {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    color: inherit;
+}
+
+.dk-btn--ghost {
+    background: var(--dk-bg-2);
+    border-color: var(--dk-line);
+    color: var(--dk-yellow);
+}
+
+.dk-btn--ghost:hover {
+    color: var(--dk-yellow);
+    border-color: var(--dk-line-yellow);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* ----- Crest row: the six game-mode badges fanned like the deck cover ---- */
+.dk-crestrow {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Sized by width so the fan always fits its container: the six widths sum
+   to 144% and the twelve -4% overlaps take back 48%, leaving 96%. */
+.dk-crestrow img {
+    display: block;
+    flex: 0 0 auto;
+    height: auto;
+    margin: 0 -4%;
+    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.6));
+}
+
+.dk-crestrow img:nth-child(1) { width: 19%; opacity: 0.55; transform: rotate(-9deg) translateY(8%); }
+.dk-crestrow img:nth-child(2) { width: 24%; opacity: 0.8;  transform: rotate(-5deg) translateY(3%); }
+.dk-crestrow img:nth-child(3) { width: 30%; opacity: 1;    transform: translateY(-3%); position: relative; z-index: 2; }
+.dk-crestrow img:nth-child(4) { width: 28%; opacity: 0.95; transform: translateY(-1%); position: relative; z-index: 1; }
+.dk-crestrow img:nth-child(5) { width: 23%; opacity: 0.78; transform: rotate(5deg) translateY(3%); }
+.dk-crestrow img:nth-child(6) { width: 20%; opacity: 0.5;  transform: rotate(9deg) translateY(8%); }
+
+/* ----- Masthead rule + footer band (partner pages) ---------------------- */
+.dk-rule {
+    height: 2px;
+    background: var(--dk-green);
+    border: 0;
+    margin: 0;
+}
+
+.dk-rule--soft {
+    height: 1px;
+    background: var(--dk-line);
+}
+
+/* ----- Grids ------------------------------------------------------------ */
+.dk-grid-2,
+.dk-grid-3,
+.dk-grid-4 {
+    display: grid;
+    gap: 1.1rem;
+}
+
+.dk-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.dk-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.dk-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 1024px) {
+    .dk-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dk-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+    .dk-grid-2,
+    .dk-grid-3,
+    .dk-grid-4 { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dk-btn,
+    .dk-btn:hover {
+        transition: none;
+        transform: none;
+    }
+}
+
+/* ----- Outcomes row + the invite/register/play/reward loop --------------- */
+.dk-outcomes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.dk-outcome {
+    padding: 1.2rem 1.2rem 1.1rem;
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line-green);
+    border-radius: var(--dk-radius);
+    text-align: left;
+}
+
+.dk-outcome .dk-icon {
+    display: flex;
+    margin-bottom: 0.8rem;
+}
+
+.dk-outcome h3 {
+    font-family: var(--dk-font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--dk-white);
+    text-transform: none;
+    letter-spacing: 0;
+    margin: 0 0 0.35rem;
+}
+
+.dk-outcome p {
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: var(--dk-text-2);
+    margin: 0;
+}
+
+.dk-loop {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr;
+    gap: 0.4rem;
+    align-items: stretch;
+    margin-top: 2rem;
+    padding-bottom: 3.2rem;
+}
+
+.dk-loop-node {
+    position: relative;
+    padding: 1.6rem 1.1rem 1rem;
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line);
+    border-radius: var(--dk-radius);
+    text-align: left;
+}
+
+.dk-loop-node .dk-num {
+    position: absolute;
+    top: -0.8rem;
+    left: 1rem;
+}
+
+.dk-loop-node h3 {
+    font-family: var(--dk-font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--dk-white);
+    text-transform: none;
+    letter-spacing: 0;
+    margin: 0 0 0.3rem;
+}
+
+.dk-loop-node p {
+    font-size: 0.88rem;
+    line-height: 1.42;
+    color: var(--dk-text-2);
+    margin: 0;
+}
+
+.dk-loop-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dk-loop-arrow svg {
+    width: 24px;
+    height: 24px;
+    color: rgba(0, 230, 118, 0.8);
+}
+
+.dk-loop-return {
+    position: absolute;
+    left: 3rem;
+    right: 3rem;
+    bottom: 0.5rem;
+    height: 1.9rem;
+    border: 2px solid rgba(0, 230, 118, 0.55);
+    border-top: 0;
+    border-radius: 0 0 14px 14px;
+}
+
+.dk-loop-return::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: -6px;
+    width: 10px;
+    height: 10px;
+    border-left: 2px solid rgba(0, 230, 118, 0.9);
+    border-top: 2px solid rgba(0, 230, 118, 0.9);
+    transform: rotate(45deg);
+}
+
+.dk-loop-return span {
+    position: absolute;
+    left: 50%;
+    bottom: -0.75rem;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    background: var(--dk-bg);
+    border: 1px solid var(--dk-line-yellow);
+    font-family: var(--dk-font-display);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dk-yellow);
+}
+
+@media (max-width: 1024px) {
+    .dk-outcomes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .dk-loop {
+        grid-template-columns: 1fr;
+        gap: 1.1rem;
+        padding-bottom: 0;
+    }
+
+    .dk-loop-arrow svg {
+        transform: rotate(90deg);
+    }
+
+    .dk-loop-return {
+        position: static;
+        height: auto;
+        border: 0;
+        border-radius: 0;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+
+    .dk-loop-return::before {
+        display: none;
+    }
+
+    .dk-loop-return span {
+        position: static;
+        transform: none;
+        white-space: normal;
+        display: inline-block;
+    }
+}
+
+@media (max-width: 560px) {
+    .dk-outcomes {
+        grid-template-columns: 1fr;
+    }
+}

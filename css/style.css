@@ -7684,3 +7684,390 @@ button,
 .lightbox-nav.hidden {
     display: none;
 }
+
+/* ==========================================================================
+   Main navigation (replaces .main-nav / .mobile-drawer above; those rules
+   are unused now). Mach Five Magnet pattern: full-width sticky bar, lockup
+   left, quiet links centred, two pill actions right; on phones a burger
+   opens a full-screen overlay under the bar. Dark only.
+   ========================================================================== */
+.bma-nav {
+    --nav-h: 4rem;
+    --nav-bg: #0a0a0a;
+    --nav-border: rgba(255, 255, 255, 0.08);
+    --nav-link: rgba(255, 255, 255, 0.72);
+    --nav-link-hover: #ffffff;
+    --nav-ghost-bg: rgba(255, 255, 255, 0.1);
+    --nav-ghost-bg-hover: rgba(255, 255, 255, 0.16);
+    --nav-panel-bg: #141414;
+    --nav-panel-border: rgba(255, 255, 255, 0.1);
+    --nav-panel-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+    --nav-dim: rgba(255, 255, 255, 0.45);
+    --nav-item-hover: rgba(255, 255, 255, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--nav-border);
+}
+
+.bma-nav-bar {
+    position: relative;
+    height: var(--nav-h);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bma-nav-logo {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.bma-nav-logo img {
+    height: 44px;
+    width: auto;
+    display: block;
+}
+
+/* Centred links, independent of the logo and action widths. */
+.bma-nav-links {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 100%;
+    transform: translateX(-50%);
+    display: none;
+    align-items: center;
+    gap: 2rem;
+}
+
+.bma-nav-item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.bma-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--nav-link);
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    white-space: nowrap;
+}
+
+.bma-nav-link:hover,
+.bma-nav-link.is-current,
+.bma-nav-link[aria-expanded="true"] {
+    color: var(--nav-link-hover);
+}
+
+.bma-nav-chevron {
+    width: 0.85rem;
+    height: 0.85rem;
+    transition: transform 0.15s ease;
+}
+
+.bma-nav-chevron.is-open {
+    transform: rotate(180deg);
+}
+
+/* Right side: ghost + solid pills, burger on phones. */
+.bma-nav-actions {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.bma-nav-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    padding: 0 1.25rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s ease, filter 0.15s ease;
+}
+
+.bma-nav-pill--ghost {
+    background: var(--nav-ghost-bg);
+    color: #ffffff;
+}
+
+.bma-nav-pill--ghost:hover {
+    background: var(--nav-ghost-bg-hover);
+}
+
+.bma-nav-pill--solid {
+    background: var(--bma-green);
+    color: #ffffff;
+}
+
+.bma-nav-pill--solid:hover {
+    filter: brightness(1.12);
+}
+
+.bma-nav-burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: var(--nav-link);
+}
+
+.bma-nav-burger svg {
+    width: 24px;
+    height: 24px;
+}
+
+.bma-nav-burger .bma-burger-close { display: none; }
+.bma-nav-burger.is-open .bma-burger-open { display: none; }
+.bma-nav-burger.is-open .bma-burger-close { display: block; }
+
+/* Panels: click to open, centred under the trigger. */
+.bma-mega-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0.25rem;
+    width: 22rem;
+    padding: 1rem;
+    background: var(--nav-panel-bg);
+    border: 1px solid var(--nav-panel-border);
+    border-radius: 12px;
+    box-shadow: var(--nav-panel-shadow);
+    z-index: 100;
+    text-align: left;
+}
+
+.bma-mega-panel--wide {
+    width: min(44rem, calc(100vw - 2rem));
+}
+
+.bma-mega-panel.is-open {
+    display: block;
+    animation: bmaNavFade 0.15s ease;
+}
+
+@keyframes bmaNavFade {
+    from { opacity: 0; transform: translateX(-50%) translateY(-4px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.bma-mega-cols {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 1.5rem;
+}
+
+.bma-mega-col--side {
+    border-left: 1px solid var(--nav-panel-border);
+    padding-left: 1.5rem;
+}
+
+.bma-mega-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--nav-dim);
+    margin: 0 0 0.5rem;
+}
+
+.bma-mega-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--nav-link);
+    transition: color 0.15s ease, background 0.15s ease;
+}
+
+.bma-mega-item:hover {
+    color: var(--nav-link-hover);
+    background: var(--nav-item-hover);
+}
+
+.bma-mega-icon {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(0, 230, 118, 0.08);
+    color: var(--bma-green-bright);
+}
+
+.bma-mega-icon .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.bma-mega-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.bma-mega-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.25;
+}
+
+.bma-mega-desc {
+    font-size: 0.78rem;
+    color: var(--nav-dim);
+    line-height: 1.35;
+}
+
+.bma-mega-popular {
+    display: block;
+    padding: 0.45rem 0.6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+.bma-mega-popular:hover {
+    background: var(--nav-item-hover);
+}
+
+.bma-mega-popular-title {
+    display: block;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+.bma-mega-popular-desc {
+    display: block;
+    font-size: 0.76rem;
+    color: var(--nav-dim);
+    line-height: 1.35;
+    margin-top: 0.1rem;
+}
+
+.bma-mega-copy {
+    font-size: 0.86rem;
+    color: var(--nav-link);
+    margin: 0 0 0.75rem;
+}
+
+.bma-mega-more {
+    display: inline-block;
+    margin: 0.5rem 0.6rem 0;
+    font-size: 0.86rem;
+    color: var(--bma-green-bright);
+    text-decoration: none;
+}
+
+.bma-mega-more:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Mobile overlay: fixed under the bar, big links, pinned pill. */
+.bma-nav-mobile {
+    display: none;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--nav-bg);
+    z-index: 999;
+    flex-direction: column;
+}
+
+.bma-nav-mobile.is-open {
+    display: flex;
+}
+
+.bma-nav-mobile-scroll {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 1.5rem 1.5rem 1rem;
+}
+
+.bma-nav-mobile .bma-mega-label {
+    margin-top: 0.5rem;
+}
+
+.bma-nav-mobile-link {
+    display: block;
+    padding: 0.7rem 0;
+    font-size: 1.7rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.bma-nav-mobile-link:active,
+.bma-nav-mobile-link.is-current {
+    color: var(--bma-green-bright);
+}
+
+.bma-nav-mobile-rule {
+    height: 1px;
+    background: var(--nav-border);
+    margin: 1rem 0 1.25rem;
+}
+
+.bma-nav-mobile-foot {
+    padding: 1rem 1.5rem calc(1.25rem + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--nav-border);
+}
+
+.bma-nav-mobile-foot .bma-nav-pill {
+    width: 100%;
+}
+
+/* Breakpoints: links and the ghost pill from 900px up; burger below. */
+@media (min-width: 900px) {
+    .bma-nav-links { display: flex; }
+    .bma-nav-burger { display: none; }
+    .bma-nav-bar { padding: 0 2rem; }
+}
+
+@media (max-width: 899.98px) {
+    .bma-nav-pill--desktop { display: none; }
+    .bma-nav-logo img { height: 38px; }
+}
+
+@media (max-width: 400px) {
+    .bma-nav-pill--solid { height: 2.25rem; padding: 0 1rem; font-size: 0.8rem; }
+}

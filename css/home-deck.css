@@ -1,0 +1,1832 @@
+/* ==========================================================================
+   home-deck.css : the home page restyled on the collateral deck system.
+
+   Loads after style.css and deck.css, on the home page only. Copy and
+   section order are untouched; this file changes surfaces, type, and
+   decoration so the page reads like the Casino Operators / Sports Industry
+   Partners decks: Montserrat display type, flat 1px-line cards, kicker
+   labels, chips, dot lists, and the TD$ bill art behind the hero and the
+   closing CTA. The curve caps between sections (see CLAUDE.md) are kept.
+   ========================================================================== */
+
+/* ==========================================================================
+   Shared: section eyebrows and headlines
+   ========================================================================== */
+.fp-eyebrow,
+.mv-eyebrow,
+.ps-eyebrow,
+.mv-advantage-eyebrow,
+.ps-narrative-eyebrow,
+.cta-magnet-label {
+    display: inline-block;
+    gap: 0;
+    font-family: var(--dk-font-display);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dk-yellow);
+    margin-bottom: 0.9rem;
+    text-shadow: none;
+}
+
+.fp-eyebrow::before,
+.mv-eyebrow::before,
+.ps-eyebrow::before,
+.mv-advantage-eyebrow::before,
+.mv-advantage-eyebrow::after,
+.ps-narrative-eyebrow::before {
+    display: none;
+}
+
+.fp-headline,
+.mv-title,
+.ps-headline,
+.cta-section h2 {
+    font-family: var(--dk-font-display);
+    font-size: clamp(1.9rem, 3.6vw, 3rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    color: var(--dk-white);
+    text-shadow: none;
+}
+
+/* Accent words: the deck's gradient, upright (no skew, no glow). */
+.fp-headline-accent,
+.mv-title-accent,
+.ps-headline-accent,
+.cta-accent,
+.hero-rotator {
+    background: var(--dk-accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    transform: none;
+    filter: none;
+    padding: 0 0.06em 0 0;
+    margin: 0 -0.06em 0 0;
+    text-shadow: none;
+}
+
+.fp-header,
+.mv-header,
+.ps-header {
+    margin-bottom: 2.75rem;
+}
+
+/* Sublines: plain lede text, not an info callout. */
+.ps-subline {
+    display: block;
+    margin: 1rem auto 0;
+    padding: 0;
+    max-width: 62ch;
+    text-align: center;
+    font-size: 1.08rem;
+    line-height: 1.55;
+    color: var(--dk-text-2);
+    background: none;
+    border: 0;
+    border-image: none;
+    border-radius: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+}
+
+.ps-subline::before {
+    display: none;
+}
+
+.mv-subline {
+    font-size: 1.08rem;
+    color: var(--dk-text-2);
+}
+
+/* Section surfaces: flat near-black, no stripes, no blurred glows. */
+.max-value-section,
+.partnership-section,
+.technology-section {
+    background: var(--dk-bg);
+    border-top: 0;
+}
+
+.max-value-section::after,
+.partnership-section::after,
+.technology-section::after,
+.mv-bg,
+.ps-bg,
+.tech-bg {
+    display: none;
+}
+
+.max-value-section {
+    padding-top: 5rem;
+}
+
+/* Section-to-section hairline (the deck's masthead rule, softened). */
+.partnership-section,
+.technology-section {
+    position: relative;
+}
+
+.partnership-section::before,
+.technology-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1200px, calc(100% - 4rem));
+    height: 1px;
+    background: var(--dk-line);
+}
+
+/* ==========================================================================
+   Hero: generated gridiron (tools/make-field.py), Montserrat headline with the
+   typing impact word, audience route pills, two phones.
+   ========================================================================== */
+.hero-deck {
+    padding: 4.5rem 2rem calc(2.5rem + 100px);
+    min-height: min(78vh, 760px);
+    display: flex;
+    align-items: center;
+    background-color: var(--dk-bg);
+    /* Generated branded field (tools/make-field.py): perspective gridiron
+       in the deck palette with the X/O play texture, baked with its own fades,
+       so only a light left text-guard sits on top. */
+    background-image:
+        linear-gradient(100deg, rgba(10, 10, 10, 0.55) 0%, rgba(10, 10, 10, 0.25) 45%, rgba(10, 10, 10, 0) 75%),
+        url('/images/deck/bg-field.jpg');
+    background-size: cover, cover;
+    background-position: center, center bottom;
+    background-repeat: no-repeat;
+    border-top: 2px solid var(--dk-green);
+    overflow: hidden;
+}
+
+@media (min-width: 900px) and (pointer: fine) {
+    .hero-deck {
+        background-attachment: scroll, fixed;
+    }
+}
+
+@supports (-webkit-touch-callout: none) {
+    .hero-deck {
+        background-attachment: scroll, scroll;
+    }
+}
+
+.hero-deck .hero-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2rem;
+    align-items: end;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-deck .hero-content {
+    text-align: left;
+    padding-bottom: 0.5rem;
+}
+
+.hero-deck .hero-title {
+    font-family: var(--dk-font-display);
+    font-size: clamp(2.1rem, 3.9vw, 3.6rem);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--dk-white);
+    text-shadow: none;
+    margin: 0 0 1.25rem;
+    max-width: 18ch;
+    text-wrap: balance;
+}
+
+/* Rotating impact word on its own line, left-aligned, fixed height so the
+   headline never shifts while it types. */
+.hero-deck .hero-rotator-wrap {
+    justify-content: flex-start;
+    width: auto;
+    height: 1.1em;
+    min-height: 1.1em;
+}
+
+.hero-deck .hero-rotator {
+    min-width: 0.4ch;
+    line-height: 1.1;
+}
+
+.hero-deck .hero-cursor {
+    background: var(--dk-yellow);
+    box-shadow: none;
+}
+
+.hero-deck .hero-description {
+    font-size: clamp(1.02rem, 1.15vw, 1.2rem);
+    line-height: 1.55;
+    color: var(--dk-white);
+    max-width: 34rem;
+    margin: 0;
+    text-shadow: none;
+    text-wrap: pretty;
+}
+
+/* Audience routes: the cover's tag pill, three of them, as links. */
+.hero-routes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.hero-route {
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-route:hover {
+    color: var(--dk-yellow);
+    background: rgba(255, 215, 0, 0.14);
+    border-color: var(--dk-yellow);
+}
+
+/* Badge crest: the cover's fanned game-mode row, as a strip under the copy. */
+.hero-crest {
+    width: min(100%, 420px);
+    min-width: 0;
+    margin: 2rem 0 0 -2%;
+}
+
+/* Two phones, as on the sports deck cover and the Tourney site hero:
+   lobby behind-left, play front-right, bleeding into the curve. */
+.hero-phones {
+    position: relative;
+    height: clamp(380px, 40vw, 600px);
+    min-width: 0;
+}
+
+.hero-phone {
+    position: absolute;
+    bottom: -8%;
+    height: 100%;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.6));
+}
+
+.hero-phone--lobby {
+    right: 36%;
+    height: 90%;
+    transform: rotate(-3deg);
+    z-index: 1;
+}
+
+.hero-phone--play {
+    right: -4%;
+    transform: rotate(2deg);
+    z-index: 2;
+}
+
+@media (max-width: 900px) {
+    .hero-deck {
+        padding: 3rem 1.25rem calc(1rem + 100px);
+        min-height: 0;
+        background-image:
+            linear-gradient(180deg, rgba(10, 10, 10, 0.62) 0%, rgba(10, 10, 10, 0.5) 45%, rgba(10, 10, 10, 0.12) 78%),
+            url('/images/deck/bg-field-mobile.jpg');
+        background-position: center, center bottom;
+    }
+
+    .hero-deck .hero-rotator-wrap {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .hero-deck .hero-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .hero-deck .hero-content {
+        text-align: center;
+        padding-bottom: 0;
+    }
+
+    .hero-deck .hero-title {
+        max-width: none;
+        margin: 0 auto 1rem;
+    }
+
+    /* style.css hides the description on phones for the old four-line
+       rotator hero; this headline is short enough to keep the lede. */
+    .hero-deck .hero-description {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .hero-routes {
+        justify-content: center;
+    }
+
+    .hero-crest {
+        max-width: 380px;
+        margin: 1.5rem auto 0;
+    }
+
+    .hero-phones {
+        height: clamp(300px, 72vw, 420px);
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
+    .hero-phone--lobby {
+        right: 40%;
+    }
+
+    .hero-phone--play {
+        right: 0;
+    }
+}
+
+/* ==========================================================================
+   Featured product
+   ========================================================================== */
+.featured-product-section {
+    background-color: var(--dk-bg);
+    background-image: var(--dk-bills-shade-page), url('/images/deck/bg-bills.jpg');
+    background-size: cover, cover;
+    background-position: center, center 15%;
+    background-repeat: no-repeat;
+}
+
+.featured-product-section::before {
+    display: none;
+}
+
+.fp-lede {
+    max-width: 62ch;
+    margin: 1rem auto 0;
+    font-size: 1.08rem;
+    line-height: 1.55;
+    color: var(--dk-text-2);
+}
+
+/* ----- Umbrella: company card, stem, flagship product card ----- */
+.fp-umbrella {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fp-umb-card {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem 2.25rem;
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line-green);
+    border-radius: var(--dk-radius);
+}
+
+.fp-umb-card--app {
+    grid-template-columns: 170px minmax(0, 1fr) minmax(0, 380px);
+    border-color: var(--dk-line-yellow);
+}
+
+.fp-umb-mark {
+    width: 170px;
+    height: auto;
+    display: block;
+}
+
+.fp-umb-body .dk-kicker {
+    margin-bottom: 0.3rem;
+}
+
+.fp-umb-kicker-2 {
+    display: block;
+    margin-top: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.fp-umb-title {
+    font-family: var(--dk-font-display);
+    font-size: clamp(1.4rem, 2vw, 1.85rem);
+    font-weight: 800;
+    color: var(--dk-white);
+    line-height: 1.1;
+    margin: 0 0 0.6rem;
+}
+
+.fp-umb-body > p {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--dk-text);
+    margin: 0;
+    max-width: 62ch;
+}
+
+.fp-umb-body .dk-chips a {
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.fp-umb-body .dk-chips a:hover {
+    background: rgba(0, 230, 118, 0.14);
+    border-color: var(--dk-green);
+}
+
+.fp-umb-stem {
+    position: relative;
+    width: 2px;
+    height: 3.4rem;
+    background: rgba(0, 230, 118, 0.6);
+}
+
+.fp-umb-stem::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -1px;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid rgba(0, 230, 118, 0.8);
+    border-bottom: 2px solid rgba(0, 230, 118, 0.8);
+    transform: translate(-50%, 0) rotate(45deg);
+}
+
+.fp-umb-stem span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    background: var(--dk-bg);
+    border: 1px solid var(--dk-line-yellow);
+    font-family: var(--dk-font-display);
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dk-yellow);
+}
+
+.fp-tagline {
+    font-size: 1rem;
+    color: var(--dk-text);
+    margin: 0 0 1.1rem;
+}
+
+/* Feature buttons as chips (the popover JS still hangs off .fp-feature). */
+.fp-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 1.4rem;
+}
+
+.fp-feature {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.36rem 0.8rem 0.36rem 0.5rem;
+    background: rgba(0, 230, 118, 0.06);
+    border: 1px solid var(--dk-line-green);
+    border-radius: 999px;
+    box-shadow: none;
+    color: var(--dk-green);
+    font-family: var(--dk-font-display);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.fp-feature:hover,
+.fp-feature:focus-visible,
+.fp-feature.active {
+    background: rgba(0, 230, 118, 0.14);
+    border-color: var(--dk-green);
+    box-shadow: none;
+}
+
+.fp-feature-icon {
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    color: var(--dk-green);
+    font-size: 18px;
+}
+
+.fp-feature:hover .fp-feature-icon,
+.fp-feature:focus-visible .fp-feature-icon,
+.fp-feature.active .fp-feature-icon {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    color: var(--dk-green);
+    transform: none;
+}
+
+.fp-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.25rem;
+}
+
+.fp-stores {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.fp-stores img {
+    height: 38px;
+    width: auto;
+    display: block;
+}
+
+.fp-feature-info {
+    background: var(--dk-bg-4);
+    border: 1px solid var(--dk-line-green);
+    border-radius: var(--dk-radius-sm);
+    color: var(--dk-text);
+}
+
+/* CTA buttons: the BMT pill. */
+.fp-cta,
+.tech-cta .fp-cta,
+.ps-header .fp-cta {
+    padding: 0.85rem 1.5rem;
+    background: linear-gradient(90deg, var(--dk-green) 0%, var(--dk-yellow) 100%);
+    color: #0a0a0a;
+    font-family: var(--dk-font-display);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    box-shadow: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, gap 0.2s ease;
+}
+
+.fp-cta:hover {
+    background: linear-gradient(90deg, var(--dk-green) 0%, var(--dk-yellow) 100%);
+    color: #0a0a0a;
+    box-shadow: 0 10px 28px rgba(0, 230, 118, 0.25);
+}
+
+.ps-header .fp-cta {
+    margin-top: 1.5rem;
+}
+
+/* Phone: quieter glow, the deck's bill art already sits behind the card. */
+.fp-phone-glow {
+    background: radial-gradient(closest-side, rgba(0, 230, 118, 0.22) 0%, rgba(255, 215, 0, 0.08) 45%, transparent 75%);
+}
+
+.fp-phone-stage::before {
+    background: repeating-linear-gradient(135deg, transparent 0, transparent 9px, rgba(0, 230, 118, 0.16) 9px, rgba(0, 230, 118, 0.16) 11px);
+}
+
+.fp-phone-stage::after {
+    background: repeating-linear-gradient(135deg, transparent 0, transparent 9px, rgba(255, 215, 0, 0.13) 9px, rgba(255, 215, 0, 0.13) 11px);
+}
+
+/* Phone column inside the product card. */
+.fp-umb-card--app .fp-phone-stage {
+    max-width: 340px;
+    margin: -1rem 0;
+}
+
+/* Audience cards under the umbrella. */
+.fp-stats {
+    max-width: 1200px;
+    margin: 1.25rem auto 0;
+    padding-top: 0;
+    border-top: 0;
+    gap: 1rem;
+}
+
+.fp-stat {
+    padding: 1.15rem 1.3rem;
+    background: var(--dk-bg-3);
+    border: 1px solid var(--dk-line);
+    border-radius: var(--dk-radius);
+    transition: border-color 0.2s ease;
+}
+
+.fp-stat:hover {
+    background: var(--dk-bg-3);
+    border-color: var(--dk-line-green);
+    transform: none;
+}
+
+.fp-stat-number {
+    font-family: var(--dk-font-display);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    color: var(--dk-green);
+    margin-bottom: 0.45rem;
+}
+
+.fp-stat-label {
+    font-size: 0.92rem;
+    color: var(--dk-text-2);
+}
+
+@media (max-width: 1024px) {
+    .fp-umb-card--app {
+        grid-template-columns: 150px minmax(0, 1fr);
+    }
+
+    .fp-umb-card--app .fp-visual {
+        grid-column: 1 / -1;
+    }
+
+    .fp-umb-card--app .fp-phone-stage {
+        margin: 0.5rem auto 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .fp-umb-card,
+    .fp-umb-card--app {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding: 1.6rem 1.25rem;
+        text-align: center;
+    }
+
+    .fp-umb-mark {
+        width: 140px;
+        margin: 0 auto;
+    }
+
+    .fp-umb-body > p {
+        margin: 0 auto;
+    }
+
+    .fp-umb-body .dk-chips,
+    .fp-features,
+    .fp-actions,
+    .fp-stores {
+        justify-content: center;
+    }
+
+    .fp-umb-stem span {
+        white-space: normal;
+        width: max-content;
+        max-width: 80vw;
+        text-align: center;
+    }
+
+    .fp-umb-card--app .fp-phone-stage {
+        max-width: 300px;
+    }
+
+    /* style.css moves .fp-visual first on phones; in the card the phone
+       reads better after the copy and buttons. */
+    .fp-umb-card--app .fp-visual {
+        order: 0;
+    }
+}
+
+/* ==========================================================================
+   Max Value: the deck's two-column "what we ask / what you get" cards
+   ========================================================================== */
+.mv-box {
+    padding: 1.75rem 1.9rem;
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line);
+    border-radius: var(--dk-radius);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    transition: border-color 0.2s ease;
+}
+
+.mv-box.bettors-box {
+    border-color: var(--dk-line-yellow);
+}
+
+.mv-box.partners-box {
+    border-color: var(--dk-line-green);
+}
+
+.mv-box::before,
+.mv-box::after {
+    display: none;
+}
+
+.mv-box:hover,
+.mv-box.bettors-box:hover,
+.mv-box.partners-box:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.mv-box-header {
+    gap: 0.75rem;
+    margin-bottom: 1.1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--dk-line-soft);
+}
+
+.mv-box .mv-box-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    background: var(--dk-bg-3);
+    box-shadow: none;
+}
+
+.mv-box.bettors-box .mv-box-icon {
+    border: 1px solid var(--dk-line-yellow);
+    color: var(--dk-yellow);
+}
+
+.mv-box.partners-box .mv-box-icon {
+    border: 1px solid var(--dk-line-green);
+    color: var(--dk-green);
+}
+
+.mv-box .mv-box-title {
+    font-family: var(--dk-font-display);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.mv-box .mv-list li {
+    padding: 0.42rem 0 0.42rem 1.4rem;
+    border-bottom: 0;
+    font-size: 0.98rem;
+    color: var(--dk-text);
+    transition: none;
+}
+
+.mv-box .mv-list li:hover {
+    padding-left: 1.4rem;
+    color: var(--dk-text);
+}
+
+.mv-box .mv-list li::before {
+    left: 0;
+    top: 1.05rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--dk-green);
+    transition: none;
+}
+
+.mv-box.bettors-box .mv-list li::before {
+    background: var(--dk-yellow);
+}
+
+.mv-box .mv-list li:hover::before {
+    width: 7px;
+}
+
+/* Competitive advantage: the deck's yellow statement box. */
+.mv-advantage {
+    padding: 2rem 2.5rem;
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line-yellow);
+    border-radius: var(--dk-radius);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+}
+
+.mv-advantage::before {
+    display: none;
+}
+
+.mv-advantage-eyebrow {
+    margin-bottom: 0.6rem;
+}
+
+.advantage-title {
+    font-family: var(--dk-font-display);
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.advantage-text {
+    font-size: 1rem;
+    color: var(--dk-text);
+}
+
+/* ==========================================================================
+   Industries: chips for tabs, a flat card for the panel
+   ========================================================================== */
+.industries-tabs {
+    gap: 0.5rem;
+}
+
+.industries-tab {
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    font-family: var(--dk-font-display);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--dk-green);
+    background: rgba(0, 230, 118, 0.06);
+    border: 1px solid var(--dk-line-green);
+    box-shadow: none;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.industries-tab-icon {
+    font-size: 19px;
+    color: inherit;
+}
+
+.industries-tab:hover {
+    color: var(--dk-green);
+    background: rgba(0, 230, 118, 0.12);
+    border-color: var(--dk-green);
+    box-shadow: none;
+}
+
+.industries-tab.active {
+    color: #0a0a0a;
+    background: var(--dk-green);
+    border-color: var(--dk-green);
+    box-shadow: none;
+}
+
+.industries-tab.active .industries-tab-icon {
+    color: #0a0a0a;
+}
+
+.industries-rail-arrow {
+    background: var(--dk-bg-2);
+    border-color: var(--dk-line);
+    backdrop-filter: none;
+}
+
+.industries-panel {
+    grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+    gap: 2.5rem;
+    padding: 2.25rem 2.5rem;
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line);
+    border-radius: var(--dk-radius);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+}
+
+.industries-panel::before {
+    display: none;
+}
+
+.industries-icon-frame {
+    width: 180px;
+    height: 180px;
+    border-radius: 16px;
+    background: var(--dk-bg-3);
+    border: 1px solid var(--dk-line-green);
+    color: var(--dk-green);
+    box-shadow: none;
+}
+
+.industries-icon-frame .material-symbols-outlined {
+    font-size: 80px;
+    filter: none;
+    font-variation-settings: 'wght' 300, 'opsz' 48;
+}
+
+.industries-panel-copy h4 {
+    font-family: var(--dk-font-display);
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+    font-weight: 800;
+    letter-spacing: -0.005em;
+    text-transform: none;
+    margin-bottom: 0.5rem;
+}
+
+.industries-panel-copy > p {
+    font-size: 1rem;
+    color: var(--dk-text);
+    margin-bottom: 1.25rem;
+}
+
+.industries-panel-list {
+    gap: 0.45rem 1.25rem;
+}
+
+.industries-panel-list li {
+    padding-left: 1.3rem;
+    font-size: 0.95rem;
+    color: var(--dk-text);
+}
+
+.industries-panel-list li::before {
+    top: 0.5em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--dk-green);
+}
+
+.industries-panel-split-label {
+    font-family: var(--dk-font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    color: var(--dk-yellow);
+}
+
+.industries-showcase {
+    margin-bottom: 3.5rem;
+}
+
+/* Why partner: the deck's green statement box + check rows. */
+.ps-narrative {
+    max-width: 980px;
+    margin-bottom: 4rem;
+    padding: 1.75rem 2rem;
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line-green);
+    border-radius: var(--dk-radius);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+}
+
+.ps-narrative::before {
+    display: none;
+}
+
+.ps-narrative-eyebrow {
+    color: var(--dk-green);
+    margin-bottom: 0.5rem;
+}
+
+.ps-narrative-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--dk-text);
+    margin-bottom: 1.25rem;
+}
+
+.ps-benefits {
+    gap: 0.6rem;
+}
+
+.ps-benefit {
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--dk-bg-3);
+    border: 1px solid var(--dk-line);
+    border-radius: var(--dk-radius-sm);
+    transition: border-color 0.2s ease;
+}
+
+.ps-benefit:hover {
+    background: var(--dk-bg-3);
+    border-color: var(--dk-line-green);
+    transform: none;
+}
+
+.ps-benefit-icon {
+    width: 26px;
+    height: 26px;
+    background: var(--dk-green);
+    color: #0a0a0a;
+    box-shadow: none;
+    font-size: 17px;
+}
+
+.ps-benefit-text {
+    font-size: 0.95rem;
+    color: var(--dk-text);
+}
+
+/* Capabilities: the deck's outcome cards (icon tile, title, body). */
+.capabilities-grid-modern {
+    gap: 1rem;
+}
+
+.capability-card-modern {
+    padding: 1.4rem 1.5rem 1.5rem;
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line-green);
+    border-radius: var(--dk-radius);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    transition: border-color 0.2s ease;
+}
+
+.capability-card-modern::before {
+    display: none;
+}
+
+.capability-card-modern:hover {
+    transform: none;
+    border-color: var(--dk-green);
+    box-shadow: none;
+}
+
+.capability-icon-modern {
+    width: 42px;
+    height: 42px;
+    background: var(--dk-bg-3);
+    border: 1px solid var(--dk-line-green);
+    border-radius: 10px;
+    box-shadow: none;
+    color: var(--dk-green);
+    font-size: 24px;
+    margin-bottom: 0.9rem;
+}
+
+.capability-card-modern:hover .capability-icon-modern {
+    background: var(--dk-bg-3);
+    border-color: var(--dk-line-green);
+    box-shadow: none;
+    color: var(--dk-green);
+}
+
+.capability-card-modern h4 {
+    font-family: var(--dk-font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: none;
+    margin-bottom: 0.4rem;
+}
+
+.capability-card-modern p {
+    font-size: 0.92rem;
+    color: var(--dk-text-2);
+}
+
+/* Responsive: restate the stack rules from style.css, because the base
+   rules above load later and would otherwise win at every width. */
+@media (max-width: 1024px) {
+    .industries-panel {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.75rem;
+        text-align: center;
+    }
+
+    .industries-icon-frame {
+        width: 140px;
+        height: 140px;
+    }
+
+    .industries-icon-frame .material-symbols-outlined {
+        font-size: 64px;
+    }
+
+    .industries-panel-list {
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    .industries-panel {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .industries-panel-list {
+        grid-template-columns: 1fr;
+    }
+
+    .ps-narrative {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .mv-box {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .mv-advantage {
+        padding: 1.75rem 1.25rem;
+    }
+
+    /* style.css forces a 2rem top pad here with !important to make room
+       for an accent line this design removes; match its weight to cancel it. */
+    .cta-subline {
+        padding-top: 0 !important;
+        margin: 0.75rem auto 1.5rem !important;
+    }
+}
+
+/* ==========================================================================
+   Technology: flat spokes, a yellow-lined hub, pillar cards
+   ========================================================================== */
+.tech-spoke {
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line);
+    border-radius: var(--dk-radius);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    transition: border-color 0.2s ease;
+}
+
+.tech-spoke:hover {
+    transform: none;
+    border-color: var(--dk-line-green);
+    box-shadow: none;
+}
+
+.tech-spoke-label {
+    font-family: var(--dk-font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--dk-text);
+}
+
+.tech-hub-inner {
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line-yellow);
+    border-radius: 16px;
+    box-shadow: none;
+}
+
+.tech-hub-inner span {
+    font-family: var(--dk-font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+}
+
+.tech-hub-pulse {
+    border-radius: 22px;
+    border-color: rgba(0, 230, 118, 0.3);
+}
+
+.tech-connections line {
+    filter: none;
+}
+
+.tech-pillar {
+    gap: 0.9rem;
+    padding: 1.25rem 1.4rem;
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line);
+    border-radius: var(--dk-radius);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    transition: border-color 0.2s ease;
+}
+
+.tech-pillar::before {
+    display: none;
+}
+
+.tech-pillar:hover {
+    transform: none;
+    border-color: var(--dk-line-green);
+    box-shadow: none;
+}
+
+.tech-pillar-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--dk-bg-3);
+    border: 1px solid var(--dk-line-green);
+    border-radius: 10px;
+    box-shadow: none;
+    color: var(--dk-green);
+}
+
+.tech-pillar:hover .tech-pillar-icon {
+    background: var(--dk-bg-3);
+    border-color: var(--dk-line-green);
+    color: var(--dk-green);
+}
+
+.tech-pillar-body h4 {
+    font-family: var(--dk-font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: none;
+    margin-bottom: 0.3rem;
+}
+
+.tech-pillar-body p {
+    font-size: 0.92rem;
+    color: var(--dk-text-2);
+}
+
+/* Closing statement: the deck's green box. */
+.tech-cta {
+    margin-top: 2rem;
+}
+
+.tech-cta .ps-subline {
+    display: block;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 1.1rem 1.5rem;
+    text-align: center;
+    font-size: 0.98rem;
+    color: var(--dk-text);
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line-green);
+    border-radius: var(--dk-radius);
+}
+
+/* ==========================================================================
+   Closing CTA: the deck cover art again, dark, no green wash
+   ========================================================================== */
+.cta-section {
+    background-color: var(--dk-bg);
+    background-image: var(--dk-bills-shade-cover), url('/images/deck/bg-bills.jpg');
+    background-size: cover, cover;
+    background-position: center, center 30%;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+@media (min-width: 900px) and (pointer: fine) {
+    .cta-section {
+        background-attachment: scroll, fixed;
+    }
+}
+
+@supports (-webkit-touch-callout: none) {
+    .cta-section {
+        background-attachment: scroll, scroll;
+    }
+}
+
+.cta-section::before,
+.cta-section::after {
+    display: none;
+}
+
+.cta-section h2 {
+    font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+    margin-bottom: 1rem;
+}
+
+.cta-subline {
+    padding-top: 0;
+    margin: 0.75rem auto 1.5rem;
+    font-size: 1.08rem;
+    color: var(--dk-text);
+    text-shadow: none;
+}
+
+.cta-subline::before {
+    display: none;
+}
+
+.cta-magnet {
+    margin-top: 2rem;
+}
+
+.cta-magnet-label {
+    margin-bottom: 0.9rem;
+}
+
+.cta-magnet-slot {
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line-yellow);
+    border-radius: var(--dk-radius);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+}
+
+.cta-magnet-slot::before {
+    display: none;
+}
+
+/* Belt cards: flat outlined tiles in the deck's three tones. */
+.cta-belt {
+    background: none;
+}
+
+.cta-card {
+    background: var(--dk-bg-2);
+    border: 1px solid var(--dk-line);
+    border-radius: var(--dk-radius);
+    box-shadow: none;
+    color: var(--dk-text);
+}
+
+.cta-card-label {
+    font-family: var(--dk-font-display);
+    font-size: clamp(0.7rem, 0.85vw, 0.82rem);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+}
+
+.cta-card-sport {
+    border-color: var(--dk-line-green);
+    box-shadow: none;
+}
+
+.cta-card-sport .cta-card-icon .material-symbols-outlined {
+    color: var(--dk-green);
+    filter: none;
+}
+
+.cta-card-word {
+    background: var(--dk-bg-2);
+    border-color: var(--dk-line-yellow);
+    box-shadow: none;
+    color: var(--dk-yellow);
+    text-shadow: none;
+}
+
+.cta-card-word .cta-card-icon .material-symbols-outlined {
+    color: var(--dk-yellow);
+    filter: none;
+}
+
+.cta-card-trophy {
+    background: var(--dk-bg-3);
+    border-color: var(--dk-line-green);
+    box-shadow: none;
+    color: var(--dk-white);
+}
+
+.cta-card-icon-badge img {
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.55));
+}
+
+/* Max Value: outcomes + loop sit where the two bullet cards were. */
+.max-value-section .dk-loop {
+    margin-bottom: 2.5rem;
+}
+
+/* Max Value background: the decks' fans-together photo, pinned (parallax)
+   with the top and bottom faded to near-black, the same recipe as the
+   "Built for every sport" section on the Tourney page (tournament.css). */
+.max-value-section {
+    background-color: var(--dk-bg);
+    background-image:
+        linear-gradient(180deg, rgba(8, 8, 8, 0.96) 0%, rgba(10, 10, 10, 0.78) 45%, rgba(10, 10, 10, 0.8) 60%, rgba(8, 8, 8, 0.97) 100%),
+        linear-gradient(135deg, rgba(0, 230, 118, 0.08) 0%, transparent 45%, rgba(255, 215, 0, 0.06) 100%),
+        url('/images/deck/bg-crowd.jpg');
+    background-size: cover, cover, cover;
+    background-position: center, center, center 30%;
+    background-repeat: no-repeat;
+    background-attachment: scroll, scroll, fixed;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .max-value-section {
+        background-attachment: scroll, scroll, scroll;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .max-value-section {
+        background-attachment: scroll, scroll, scroll;
+    }
+}
+
+/* Cards sit on the photo: give them a touch more opacity than the flat
+   sections so the crowd stays behind the copy, not through it. */
+.max-value-section .dk-outcome,
+.max-value-section .dk-loop-node,
+.max-value-section .mv-advantage {
+    background: rgba(20, 20, 20, 0.92);
+}
+
+/* ==========================================================================
+   Industries: real visuals per tab, program links, bring/get columns
+   ========================================================================== */
+.industries-panel {
+    grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+    align-items: center;
+}
+
+.industries-panel-visual {
+    min-height: 360px;
+}
+
+.industries-visual {
+    display: block;
+    max-width: 100%;
+}
+
+.industries-visual--phone {
+    height: 380px;
+    width: auto;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
+}
+
+.industries-visual--photo {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    border-radius: var(--dk-radius);
+    border: 1px solid var(--dk-line);
+}
+
+.industries-visual--banner {
+    width: 100%;
+    height: auto;
+    border-radius: var(--dk-radius);
+    border: 1px solid var(--dk-line);
+}
+
+.industries-panel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1.25rem;
+    font-family: var(--dk-font-display);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dk-yellow);
+    text-decoration: none;
+    transition: gap 0.2s ease;
+}
+
+.industries-panel-link:hover {
+    gap: 0.7rem;
+    color: var(--dk-yellow);
+}
+
+.industries-panel-split {
+    margin-bottom: 0;
+}
+
+.ps-narrative-title {
+    font-family: var(--dk-font-display);
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    font-weight: 800;
+    color: var(--dk-white);
+    line-height: 1.15;
+    margin: 0 0 0.6rem;
+}
+
+.ps-two {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.ps-two-col {
+    padding: 1.1rem 1.25rem;
+    background: var(--dk-bg-3);
+    border: 1px solid var(--dk-line);
+    border-radius: var(--dk-radius-sm);
+}
+
+.ps-two-col .dk-kicker {
+    margin-bottom: 0.6rem;
+}
+
+.ps-two-col .dk-dots li {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+}
+
+@media (max-width: 1024px) {
+    .industries-panel-visual {
+        min-height: 0;
+    }
+
+    .industries-visual--phone {
+        height: 300px;
+    }
+
+    .industries-visual--photo {
+        height: 220px;
+    }
+}
+
+@media (max-width: 640px) {
+    .ps-two {
+        grid-template-columns: 1fr;
+    }
+}
+
+.industries-visual-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.industries-visual-stack .industries-visual--banner:nth-child(2) {
+    transform: translateX(6%);
+}
+
+.industries-visual-stack .industries-visual--banner:nth-child(3) {
+    transform: translateX(-6%);
+}
+
+/* Restated after the desktop panel rule above so the phone stack wins. */
+@media (max-width: 1024px) {
+    .industries-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .industries-visual-stack {
+        max-width: 360px;
+        margin: 0 auto;
+    }
+}
+
+/* ----- Industry tab visual: a mock tournament card in the partner's brand ----- */
+.industries-panel-visual {
+    min-height: 0;
+}
+
+.ind-card {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    background: var(--dk-bg-3);
+    border: 1px solid var(--dk-line);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
+    font-family: var(--dk-font-body);
+    text-align: left;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.ind-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid var(--dk-line-soft);
+}
+
+.ind-card-brand {
+    font-family: var(--dk-font-display);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dk-yellow);
+    padding: 0.28rem 0.6rem;
+    border: 1px dashed var(--dk-line-yellow);
+    border-radius: 6px;
+}
+
+.ind-card-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--dk-font-display);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dk-green);
+}
+
+.ind-card-status i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--dk-green);
+    box-shadow: 0 0 8px rgba(0, 230, 118, 0.8);
+}
+
+.ind-card-art {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 1rem 0.9rem 0.8rem;
+    background: radial-gradient(60% 80% at 50% 30%, rgba(0, 230, 118, 0.18), transparent 70%), var(--dk-bg-2);
+}
+
+.ind-card-art img {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.6));
+}
+
+.ind-card-mode {
+    font-family: var(--dk-font-display);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dk-text-2);
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--dk-line);
+    border-radius: 999px;
+    background: var(--dk-bg);
+}
+
+.ind-card-body {
+    padding: 0.8rem 0.9rem 0.9rem;
+}
+
+.ind-card-league {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--dk-text-3);
+    margin-bottom: 0.15rem;
+}
+
+.ind-card-title {
+    display: block;
+    font-family: var(--dk-font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--dk-white);
+    margin-bottom: 0.7rem;
+}
+
+.ind-card-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+}
+
+.ind-card-meta span {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--dk-white);
+}
+
+.ind-card-meta b,
+.ind-card-prize b {
+    font-family: var(--dk-font-display);
+    font-size: 0.56rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dk-text-3);
+}
+
+.ind-card-prize {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--dk-yellow);
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--dk-line-yellow);
+    border-radius: 8px;
+    background: rgba(255, 215, 0, 0.05);
+    margin-bottom: 0.75rem;
+}
+
+.ind-card-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.ind-card-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--dk-line);
+    font-family: var(--dk-font-display);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dk-text);
+}
+
+.ind-card-btn--join {
+    border-color: transparent;
+    background: linear-gradient(90deg, var(--dk-green) 0%, var(--dk-yellow) 100%);
+    color: #0a0a0a;
+}
+
+.ind-card-note {
+    position: absolute;
+    right: 0.9rem;
+    bottom: 0.35rem;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dk-text-3);
+}
+
+.ind-card-body {
+    padding-bottom: 1.4rem;
+}
+
+/* ==========================================================================
+   Technology: spokes coloured by ownership, deployment options as pillars
+   ========================================================================== */
+.tech-spoke[data-own="engine"] {
+    border-color: var(--dk-line-green);
+}
+
+.tech-spoke[data-own="partner"] {
+    border-color: var(--dk-line-yellow);
+}
+
+.tech-spoke[data-own="partner"] .tech-spoke-icon {
+    color: var(--dk-yellow);
+}
+
+.tech-diagram {
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tech-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+}
+
+.tech-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--dk-font-display);
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dk-text-2);
+}
+
+.tech-legend-item i {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    border: 1px solid;
+}
+
+.tech-legend-item--engine i {
+    border-color: var(--dk-green);
+    background: rgba(0, 230, 118, 0.2);
+}
+
+.tech-legend-item--partner i {
+    border-color: var(--dk-yellow);
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.tech-pillar-body .dk-kicker {
+    margin-bottom: 0.2rem;
+}
+
+.tech-pillar:nth-child(2) {
+    border-color: var(--dk-line-yellow);
+}
+
+.tech-pillar:nth-child(2) .tech-pillar-icon {
+    border-color: var(--dk-line-yellow);
+    color: var(--dk-yellow);
+}
+
+.tech-pillar:nth-child(2):hover .tech-pillar-icon {
+    border-color: var(--dk-line-yellow);
+    color: var(--dk-yellow);
+}
