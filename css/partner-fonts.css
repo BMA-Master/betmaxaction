@@ -1,0 +1,14 @@
+/* Clarity City, self-hosted (static/fonts/clarity-city, SIL Open Font License).
+   Replaces the Google Fonts Inter link. Weights match what the site uses:
+   300-900 upright, plus italics at 400, 700 and 900. */
+
+@font-face { font-family: 'Clarity City'; font-weight: 300; font-style: normal; font-display: swap; src: url('../fonts/clarity-city/ClarityCity-Light.woff2') format('woff2'); }
+@font-face { font-family: 'Clarity City'; font-weight: 400; font-style: normal; font-display: swap; src: url('../fonts/clarity-city/ClarityCity-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Clarity City'; font-weight: 400; font-style: italic; font-display: swap; src: url('../fonts/clarity-city/ClarityCity-RegularItalic.woff2') format('woff2'); }
+@font-face { font-family: 'Clarity City'; font-weight: 500; font-style: normal; font-display: swap; src: url('../fonts/clarity-city/ClarityCity-Medium.woff2') format('woff2'); }
+@font-face { font-family: 'Clarity City'; font-weight: 600; font-style: normal; font-display: swap; src: url('../fonts/clarity-city/ClarityCity-SemiBold.woff2') format('woff2'); }
+@font-face { font-family: 'Clarity City'; font-weight: 700; font-style: normal; font-display: swap; src: url('../fonts/clarity-city/ClarityCity-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'Clarity City'; font-weight: 700; font-style: italic; font-display: swap; src: url('../fonts/clarity-city/ClarityCity-BoldItalic.woff2') format('woff2'); }
+@font-face { font-family: 'Clarity City'; font-weight: 800; font-style: normal; font-display: swap; src: url('../fonts/clarity-city/ClarityCity-ExtraBold.woff2') format('woff2'); }
+@font-face { font-family: 'Clarity City'; font-weight: 900; font-style: normal; font-display: swap; src: url('../fonts/clarity-city/ClarityCity-Black.woff2') format('woff2'); }
+@font-face { font-family: 'Clarity City'; font-weight: 900; font-style: italic; font-display: swap; src: url('../fonts/clarity-city/ClarityCity-BlackItalic.woff2') format('woff2'); }

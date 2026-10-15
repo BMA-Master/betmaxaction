@@ -1,0 +1,30 @@
+# Bet Max Action
+
+> Social sports gaming that scales. Bet Max Tourney and Bet Max Partner Tools for branded tournaments, player engagement, and API integration.
+
+Bet Max Tourney is the consumer app for free social sports betting, public tournaments, private pools, and live Leaderboards. Tournament Dollars (TD$) are in-game scoring units.
+
+Bet Max Partner Tools covers tournament management, player management, branding, rewards, and the Bet Max API. Partners can use a hosted app, embed branded tournament cards that lead into the hosted app, or build their own interface through the API. Paid entry requires a separately scoped wallet integration and operator compliance approval.
+
+The current Partner Tools page is /partner-tools/.
+
+## Products and Partner Programs
+
+- [Bet Max Action](https://betmaxaction.com/): Social sports gaming and partner programs.
+- [Bet Max Tourney](https://betmaxaction.com/bet-max-tourney/): The app experience, game formats, sports, and partner opportunities.
+- [Bet Max Partner Tools](https://betmaxaction.com/partner-tools/): Integration options, branded examples, tournament tools, player management, and API access.
+- [Casino Operators](https://betmaxaction.com/casino-operators/): Branded tournaments and integration options for casino operators.
+- [Sports Industry Partners](https://betmaxaction.com/sports-industry-partners/): Sports industry relationships and brand licensing opportunities.
+
+## Contact and Resources
+
+- [Contact](https://betmaxaction.com/contact/): Partnerships, product support, and general inquiries. Email: info@betmaxaction.com.
+- [Knowledge Base](https://betmaxaction.com/knowledge-base/): Company news, product updates, and partnerships.
+- [Mach Five Tech Partnership](https://betmaxaction.com/knowledge-base/mach-five-tech-partnership/): Technology partnership announcement.
+- [Bet Max API Documentation](https://machfive-bmacdev-rest.onrender.com/api-docs): API reference linked from Partner Tools.
+
+## Optional
+
+- [Bet Max Tourney Website](https://www.betmaxtourney.com/): Consumer game guides and app downloads.
+- [App Store](https://apps.apple.com/us/app/bet-max-tourney/id6805931195): Bet Max Tourney for iOS.
+- [Google Play](https://play.google.com/store/apps/details?id=com.betmaxtourney.app): Bet Max Tourney for Android.

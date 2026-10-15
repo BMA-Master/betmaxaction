@@ -80,7 +80,7 @@
     font-size: clamp(2.4rem, 4.8vw, 4.5rem);
     font-weight: 900;
     letter-spacing: -0.02em;
-    text-transform: uppercase;
+    text-transform: none;
     line-height: 1.04;
 }
 
@@ -88,7 +88,7 @@
     font-size: clamp(1.9rem, 3.6vw, 3rem);
     font-weight: 900;
     letter-spacing: -0.015em;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 .dk-h3 {

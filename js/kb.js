@@ -58,7 +58,7 @@
             categoryTags.forEach(function (tag) {
                 const isActive = tag.dataset.category === slug;
                 tag.classList.toggle('active', isActive);
-                tag.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                tag.setAttribute('aria-pressed', isActive ? 'true' : 'false');
             });
             applyFilters();
         }
