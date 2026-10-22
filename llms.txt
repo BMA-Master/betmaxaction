@@ -19,9 +19,22 @@ The current Partner Tools page is /partner-tools/.
 ## Contact and Resources
 
 - [Contact](https://betmaxaction.com/contact/): Partnerships, product support, and general inquiries. Email: info@betmaxaction.com.
-- [Knowledge Base](https://betmaxaction.com/knowledge-base/): Company news, product updates, and partnerships.
-- [Mach Five Tech Partnership](https://betmaxaction.com/knowledge-base/mach-five-tech-partnership/): Technology partnership announcement.
+- [Knowledge Base](https://betmaxaction.com/knowledge-base/): Tournament strategy, integration guides, company news, and partnerships.
 - [Bet Max API Documentation](https://machfive-bmacdev-rest.onrender.com/api-docs): API reference linked from Partner Tools.
+
+## Articles
+
+- [Hosted, Embedded, or API: Choosing Your Tournament Integration](https://betmaxaction.com/knowledge-base/hosted-embedded-api-tournament-integration/): Compare hosted apps, embedded tournament cards, and API integration. Understand the responsibilities and tradeoffs for your next branded sports competition.
+
+- [From Sign-Up to Repeat Play: Measuring Sports Tournament Engagement](https://betmaxaction.com/knowledge-base/measuring-sports-tournament-engagement/): Measure sports tournament engagement through registrations, first picks, repeat play, and private pools. See what each metric can tell you about your audience.
+
+- [Designing a Branded Sports Tournament Experience](https://betmaxaction.com/knowledge-base/designing-branded-sports-tournaments/): Plan a branded sports tournament around your audience, game format, invitations, rewards, and goals. Explore examples built with Bet Max Partner Tools.
+
+- [Bet Max Action Partners with Mach Five Tech to Power Bet Max Tourney and Partner Tools](https://betmaxaction.com/knowledge-base/mach-five-tech-partnership/): Bet Max Action partners with Mach Five Tech to develop Bet Max Tourney and Bet Max Partner Tools for social sports gaming and branded tournaments.
+
+## Site Index
+
+- [Sitemap](https://betmaxaction.com/sitemap.xml): Canonical public page URLs and modification dates.
 
 ## Optional
 
